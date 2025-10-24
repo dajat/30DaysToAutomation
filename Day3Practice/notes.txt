@@ -1,0 +1,1 @@
+This is my first test folder and file created from the terminal using Git.
