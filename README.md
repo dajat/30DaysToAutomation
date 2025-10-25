@@ -1,2 +1,2 @@
-# 30DaysToAutomation
+# 30-Days-To-Automation
 Exploring Git, Javascript, and Playwright
