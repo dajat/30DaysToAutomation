@@ -1,0 +1,364 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e9]:
+        - generic [ref=e11]:
+          - img "ClassPilot Logo" [ref=e14]
+          - generic [ref=e15]:
+            - heading "ClassPilot" [level=2] [ref=e16]
+            - paragraph [ref=e17]: Education Management
+        - generic [ref=e18]:
+          - generic [ref=e19]: Teaching Tools
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Dashboard" [ref=e23] [cursor=pointer]:
+                - /url: /
+                - img [ref=e24]
+                - generic [ref=e27]: Dashboard
+            - listitem [ref=e28]:
+              - link "Students" [ref=e29] [cursor=pointer]:
+                - /url: /students
+                - img [ref=e30]
+                - generic [ref=e35]: Students
+            - listitem [ref=e36]:
+              - link "Attendance" [ref=e37] [cursor=pointer]:
+                - /url: /attendance
+                - img [ref=e38]
+                - generic [ref=e41]: Attendance
+            - listitem [ref=e42]:
+              - link "Schedule" [ref=e43] [cursor=pointer]:
+                - /url: /schedule
+                - img [ref=e44]
+                - generic [ref=e46]: Schedule
+            - listitem [ref=e47]:
+              - link "Grades" [ref=e48] [cursor=pointer]:
+                - /url: /grades
+                - img [ref=e49]
+                - generic [ref=e52]: Grades
+            - listitem [ref=e53]:
+              - link "Assignments" [ref=e54] [cursor=pointer]:
+                - /url: /assignments
+                - img [ref=e55]
+                - generic [ref=e58]: Assignments
+            - listitem [ref=e59]:
+              - link "Lesson Plans" [ref=e60] [cursor=pointer]:
+                - /url: /lesson-plans
+                - img [ref=e61]
+                - generic [ref=e64]: Lesson Plans
+            - listitem [ref=e65]:
+              - link "Communications" [ref=e66] [cursor=pointer]:
+                - /url: /communications
+                - img [ref=e67]
+                - generic [ref=e70]: Communications
+            - listitem [ref=e71]:
+              - link "Reports" [ref=e72] [cursor=pointer]:
+                - /url: /reports
+                - img [ref=e73]
+                - generic [ref=e75]: Reports
+            - listitem [ref=e76]:
+              - link "Notes & Feedback" [ref=e77] [cursor=pointer]:
+                - /url: /notes
+                - img [ref=e78]
+                - generic [ref=e80]: Notes & Feedback
+        - generic [ref=e81]:
+          - generic [ref=e82]: User Views
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "Parent View" [ref=e86] [cursor=pointer]:
+                - /url: /parent-view
+                - img [ref=e87]
+                - generic [ref=e90]: Parent View
+            - listitem [ref=e91]:
+              - link "Student View" [ref=e92] [cursor=pointer]:
+                - /url: /student-view
+                - img [ref=e93]
+                - generic [ref=e95]: Student View
+      - generic [ref=e96]:
+        - banner [ref=e97]:
+          - generic [ref=e99]:
+            - button "Toggle Sidebar" [ref=e101] [cursor=pointer]:
+              - img
+              - generic [ref=e102]: Toggle Sidebar
+            - generic [ref=e103]:
+              - heading "Welcome back, hello" [level=2] [ref=e104]
+              - paragraph [ref=e105]: Saturday, March 28, 2026
+            - generic [ref=e106]:
+              - button "7" [ref=e107] [cursor=pointer]:
+                - img
+                - generic [ref=e108]: "7"
+              - button "H" [ref=e109] [cursor=pointer]:
+                - generic [ref=e111]: H
+        - main [ref=e112]:
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - heading "Teacher Dashboard" [level=1] [ref=e117]
+              - paragraph [ref=e118]: Welcome back, Dr. Sarah Johnson
+            - generic [ref=e119]:
+              - heading "Primary Class Overview" [level=2] [ref=e120]: Primary Class Overview
+              - generic [ref=e122]:
+                - generic [ref=e126]:
+                  - generic [ref=e127]:
+                    - generic [ref=e130]: AD
+                    - img [ref=e132]
+                  - generic [ref=e134]:
+                    - heading "Advanced Mathematics" [level=3] [ref=e135]
+                    - paragraph [ref=e136]: Grade 11 & 12
+                    - paragraph [ref=e137]: Room B-204 • Period 3rd
+                  - generic [ref=e138]:
+                    - img [ref=e139]
+                    - text: Active Class
+                - generic [ref=e142]:
+                  - generic [ref=e143]:
+                    - img [ref=e145]
+                    - generic [ref=e150]: "32"
+                    - paragraph [ref=e151]: Students
+                  - generic [ref=e152]:
+                    - img [ref=e154]
+                    - generic [ref=e156]: 87%
+                    - paragraph [ref=e157]: Class Average
+                  - generic [ref=e158]:
+                    - img [ref=e160]
+                    - generic [ref=e163]: 10:30 AM
+                    - paragraph [ref=e164]: Next Class
+            - generic [ref=e165]:
+              - heading "Teaching Overview" [level=2] [ref=e166]: Teaching Overview
+              - generic [ref=e168]:
+                - generic [ref=e172]:
+                  - img [ref=e174]
+                  - generic [ref=e177]:
+                    - paragraph [ref=e178]: Total Students
+                    - paragraph [ref=e179]: "127"
+                - generic [ref=e183]:
+                  - img [ref=e185]
+                  - generic [ref=e188]:
+                    - paragraph [ref=e189]: Assignments to Grade
+                    - paragraph [ref=e190]: "23"
+                - generic [ref=e194]:
+                  - img [ref=e196]
+                  - generic [ref=e198]:
+                    - paragraph [ref=e199]: Classes Teaching
+                    - paragraph [ref=e200]: "5"
+                - generic [ref=e204]:
+                  - img [ref=e206]
+                  - generic [ref=e208]:
+                    - paragraph [ref=e209]: Avg Class Performance
+                    - paragraph [ref=e210]: 87%
+            - generic [ref=e211]:
+              - generic [ref=e212]:
+                - generic [ref=e213]:
+                  - heading "Class Performance 5 Classes" [level=3] [ref=e215]:
+                    - img [ref=e217]
+                    - text: Class Performance
+                    - generic [ref=e219]: 5 Classes
+                  - generic [ref=e221]:
+                    - generic [ref=e223]:
+                      - generic [ref=e224]:
+                        - generic [ref=e225]:
+                          - heading "Advanced Mathematics" [level=4] [ref=e226]
+                          - paragraph [ref=e227]: Period 3rd
+                        - generic [ref=e228]:
+                          - img [ref=e230]
+                          - generic [ref=e233]: 87%
+                      - progressbar [ref=e235]
+                      - generic [ref=e237]:
+                        - generic [ref=e238]:
+                          - generic [ref=e239]:
+                            - img [ref=e240]
+                            - text: 32 students
+                          - generic [ref=e245]: 12 excellent
+                          - generic [ref=e246]: 3 struggling
+                        - generic [ref=e247]: Good
+                    - generic [ref=e249]:
+                      - generic [ref=e250]:
+                        - generic [ref=e251]:
+                          - heading "Algebra II" [level=4] [ref=e252]
+                          - paragraph [ref=e253]: Period 5th
+                        - generic [ref=e254]:
+                          - img [ref=e256]
+                          - generic [ref=e257]: 82%
+                      - progressbar [ref=e259]
+                      - generic [ref=e261]:
+                        - generic [ref=e262]:
+                          - generic [ref=e263]:
+                            - img [ref=e264]
+                            - text: 28 students
+                          - generic [ref=e269]: 8 excellent
+                          - generic [ref=e270]: 4 struggling
+                        - generic [ref=e271]: Good
+                    - generic [ref=e273]:
+                      - generic [ref=e274]:
+                        - generic [ref=e275]:
+                          - heading "Geometry" [level=4] [ref=e276]
+                          - paragraph [ref=e277]: Period 2nd
+                        - generic [ref=e278]:
+                          - img [ref=e280]
+                          - generic [ref=e283]: 89%
+                      - progressbar [ref=e285]
+                      - generic [ref=e287]:
+                        - generic [ref=e288]:
+                          - generic [ref=e289]:
+                            - img [ref=e290]
+                            - text: 30 students
+                          - generic [ref=e295]: 15 excellent
+                          - generic [ref=e296]: 2 struggling
+                        - generic [ref=e297]: Good
+                    - generic [ref=e299]:
+                      - generic [ref=e300]:
+                        - generic [ref=e301]:
+                          - heading "Pre-Calculus" [level=4] [ref=e302]
+                          - paragraph [ref=e303]: Period 1st
+                        - generic [ref=e304]:
+                          - img [ref=e306]
+                          - generic [ref=e309]: 91%
+                      - progressbar [ref=e311]
+                      - generic [ref=e313]:
+                        - generic [ref=e314]:
+                          - generic [ref=e315]:
+                            - img [ref=e316]
+                            - text: 25 students
+                          - generic [ref=e321]: 18 excellent
+                          - generic [ref=e322]: 1 struggling
+                        - generic [ref=e323]: Excellent
+                    - generic [ref=e325]:
+                      - generic [ref=e326]:
+                        - generic [ref=e327]:
+                          - heading "Statistics" [level=4] [ref=e328]
+                          - paragraph [ref=e329]: Period 7th
+                        - generic [ref=e330]:
+                          - img [ref=e332]
+                          - generic [ref=e333]: 85%
+                      - progressbar [ref=e335]
+                      - generic [ref=e337]:
+                        - generic [ref=e338]:
+                          - generic [ref=e339]:
+                            - img [ref=e340]
+                            - text: 22 students
+                          - generic [ref=e345]: 10 excellent
+                          - generic [ref=e346]: 2 struggling
+                        - generic [ref=e347]: Good
+                - generic [ref=e348]:
+                  - heading "Assignments to Grade 3 Pending" [level=3] [ref=e350]:
+                    - img [ref=e352]
+                    - text: Assignments to Grade
+                    - generic [ref=e355]: 3 Pending
+                  - generic [ref=e356]:
+                    - generic [ref=e357]:
+                      - generic [ref=e359]:
+                        - img [ref=e361]
+                        - generic [ref=e364]:
+                          - generic [ref=e365]:
+                            - heading "Quadratic Functions Test" [level=4] [ref=e366]
+                            - generic [ref=e367]: Urgent
+                          - paragraph [ref=e368]: Algebra II
+                          - generic [ref=e369]:
+                            - generic [ref=e370]:
+                              - generic [ref=e371]: 26/28 submitted
+                              - generic [ref=e372]: Test
+                            - generic [ref=e373]:
+                              - paragraph [ref=e374]: "Due: Today"
+                              - paragraph [ref=e375]: 2 hours left
+                          - generic [ref=e377]:
+                            - generic [ref=e378]: Progress
+                            - generic [ref=e379]: 93%
+                      - generic [ref=e383]:
+                        - img [ref=e385]
+                        - generic [ref=e388]:
+                          - generic [ref=e389]:
+                            - heading "Geometry Proofs Homework" [level=4] [ref=e390]
+                            - generic [ref=e391]: Medium
+                          - paragraph [ref=e392]: Geometry
+                          - generic [ref=e393]:
+                            - generic [ref=e394]:
+                              - generic [ref=e395]: 28/30 submitted
+                              - generic [ref=e396]: Homework
+                            - generic [ref=e397]:
+                              - paragraph [ref=e398]: "Due: Tomorrow"
+                              - paragraph [ref=e399]: 1 day left
+                          - generic [ref=e401]:
+                            - generic [ref=e402]: Progress
+                            - generic [ref=e403]: 93%
+                      - generic [ref=e407]:
+                        - img [ref=e409]
+                        - generic [ref=e412]:
+                          - generic [ref=e413]:
+                            - heading "Calculus Integration Quiz" [level=4] [ref=e414]
+                            - generic [ref=e415]: Low
+                          - paragraph [ref=e416]: Pre-Calculus
+                          - generic [ref=e417]:
+                            - generic [ref=e418]:
+                              - generic [ref=e419]: 23/25 submitted
+                              - generic [ref=e420]: Quiz
+                            - generic [ref=e421]:
+                              - paragraph [ref=e422]: "Due: Friday"
+                              - paragraph [ref=e423]: 3 days left
+                          - generic [ref=e425]:
+                            - generic [ref=e426]: Progress
+                            - generic [ref=e427]: 92%
+                    - button "View All Assignments" [ref=e430] [cursor=pointer]:
+                      - text: View All Assignments
+                      - img
+              - generic [ref=e432]:
+                - heading "Faculty Announcements 2 New" [level=3] [ref=e434]:
+                  - img [ref=e436]
+                  - text: Faculty Announcements
+                  - generic [ref=e439]: 2 New
+                - generic [ref=e440]:
+                  - generic [ref=e441]:
+                    - generic [ref=e443] [cursor=pointer]:
+                      - img [ref=e445]
+                      - generic [ref=e448]:
+                        - generic [ref=e449]:
+                          - heading "Faculty Meeting - Curriculum Updates" [level=4] [ref=e450]
+                          - generic [ref=e451]: New
+                        - paragraph [ref=e452]: Monthly faculty meeting scheduled for Friday at 3:30 PM in the main conference room. We'll discuss new curriculum standards and assessment methods.
+                        - generic [ref=e453]:
+                          - generic [ref=e454]: "From: Principal Martinez"
+                          - generic [ref=e455]:
+                            - generic [ref=e456]: general
+                            - generic [ref=e457]: Today
+                    - generic [ref=e459] [cursor=pointer]:
+                      - img [ref=e461]
+                      - generic [ref=e463]:
+                        - generic [ref=e464]:
+                          - heading "Grade Submission Deadline" [level=4] [ref=e465]
+                          - generic [ref=e466]: New
+                        - paragraph [ref=e467]: Reminder that all quarter grades must be submitted by Wednesday at 5:00 PM. Please ensure all assignments are graded and entered into the system.
+                        - generic [ref=e468]:
+                          - generic [ref=e469]: "From: Academic Office"
+                          - generic [ref=e470]:
+                            - generic [ref=e471]: urgent
+                            - generic [ref=e472]: Yesterday
+                    - generic [ref=e474] [cursor=pointer]:
+                      - img [ref=e476]
+                      - generic [ref=e478]:
+                        - heading "Professional Development Workshop" [level=4] [ref=e480]
+                        - paragraph [ref=e481]: Join us for a workshop on 'Technology Integration in Mathematics' next Tuesday from 4:00-6:00 PM. Registration is required.
+                        - generic [ref=e482]:
+                          - generic [ref=e483]: "From: Professional Development"
+                          - generic [ref=e484]:
+                            - generic [ref=e485]: event
+                            - generic [ref=e486]: 2 days ago
+                  - button "View All Announcements" [ref=e487] [cursor=pointer]:
+                    - text: View All Announcements
+                    - img
+    - region "Notifications (F8)":
+      - list [ref=e489]:
+        - status [ref=e490]:
+          - generic [ref=e491]:
+            - generic [ref=e492]: Welcome back!
+            - generic [ref=e493]: You have been signed in successfully.
+          - button [ref=e494] [cursor=pointer]:
+            - img [ref=e495]
+    - region "Notifications alt+T"
+  - complementary "Edit with Lovable" [ref=e499]:
+    - link "Edit with Lovable" [ref=e500] [cursor=pointer]:
+      - /url: https://lovable.dev/projects/e72892f5-1e19-494d-a0dd-fac4aaf73da4?utm_source=lovable-badge
+      - generic [ref=e501]: Edit with
+      - img [ref=e502]
+    - button "Dismiss" [ref=e507] [cursor=pointer]:
+      - img [ref=e508]
+  - status [ref=e510]: Notification Welcome back!You have been signed in successfully.
+```

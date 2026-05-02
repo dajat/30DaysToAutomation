@@ -1,0 +1,352 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e9]:
+        - generic [ref=e11]:
+          - img "ClassPilot Logo" [ref=e14]
+          - generic [ref=e15]:
+            - heading "ClassPilot" [level=2] [ref=e16]
+            - paragraph [ref=e17]: Education Management
+        - generic [ref=e18]:
+          - generic [ref=e19]: Teaching Tools
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Dashboard" [ref=e23] [cursor=pointer]:
+                - /url: /
+                - img [ref=e24]
+                - generic [ref=e27]: Dashboard
+            - listitem [ref=e28]:
+              - link "Students" [ref=e29] [cursor=pointer]:
+                - /url: /students
+                - img [ref=e30]
+                - generic [ref=e35]: Students
+            - listitem [ref=e36]:
+              - link "Attendance" [ref=e37] [cursor=pointer]:
+                - /url: /attendance
+                - img [ref=e38]
+                - generic [ref=e41]: Attendance
+            - listitem [ref=e42]:
+              - link "Schedule" [active] [ref=e43] [cursor=pointer]:
+                - /url: /schedule
+                - img [ref=e44]
+                - generic [ref=e46]: Schedule
+            - listitem [ref=e47]:
+              - link "Grades" [ref=e48] [cursor=pointer]:
+                - /url: /grades
+                - img [ref=e49]
+                - generic [ref=e52]: Grades
+            - listitem [ref=e53]:
+              - link "Assignments" [ref=e54] [cursor=pointer]:
+                - /url: /assignments
+                - img [ref=e55]
+                - generic [ref=e58]: Assignments
+            - listitem [ref=e59]:
+              - link "Lesson Plans" [ref=e60] [cursor=pointer]:
+                - /url: /lesson-plans
+                - img [ref=e61]
+                - generic [ref=e64]: Lesson Plans
+            - listitem [ref=e65]:
+              - link "Communications" [ref=e66] [cursor=pointer]:
+                - /url: /communications
+                - img [ref=e67]
+                - generic [ref=e70]: Communications
+            - listitem [ref=e71]:
+              - link "Reports" [ref=e72] [cursor=pointer]:
+                - /url: /reports
+                - img [ref=e73]
+                - generic [ref=e75]: Reports
+            - listitem [ref=e76]:
+              - link "Notes & Feedback" [ref=e77] [cursor=pointer]:
+                - /url: /notes
+                - img [ref=e78]
+                - generic [ref=e80]: Notes & Feedback
+        - generic [ref=e81]:
+          - generic [ref=e82]: User Views
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "Parent View" [ref=e86] [cursor=pointer]:
+                - /url: /parent-view
+                - img [ref=e87]
+                - generic [ref=e90]: Parent View
+            - listitem [ref=e91]:
+              - link "Student View" [ref=e92] [cursor=pointer]:
+                - /url: /student-view
+                - img [ref=e93]
+                - generic [ref=e95]: Student View
+      - generic [ref=e96]:
+        - banner [ref=e97]:
+          - generic [ref=e99]:
+            - button "Toggle Sidebar" [ref=e101] [cursor=pointer]:
+              - img
+              - generic [ref=e102]: Toggle Sidebar
+            - generic [ref=e103]:
+              - heading "Welcome back, hello" [level=2] [ref=e104]
+              - paragraph [ref=e105]: Saturday, May 2, 2026
+            - generic [ref=e106]:
+              - button "7" [ref=e107] [cursor=pointer]:
+                - img
+                - generic [ref=e108]: "7"
+              - button "H" [ref=e109] [cursor=pointer]:
+                - generic [ref=e111]: H
+        - main [ref=e112]:
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - generic [ref=e117]:
+                - heading "Class Schedule" [level=1] [ref=e118]
+                - paragraph [ref=e119]: Manage your daily schedule and events
+              - generic [ref=e120]:
+                - button "Export" [ref=e121] [cursor=pointer]:
+                  - img
+                  - text: Export
+                - button "Share" [ref=e122] [cursor=pointer]:
+                  - img
+                  - text: Share
+                - button "Add Event" [ref=e123] [cursor=pointer]:
+                  - img
+                  - text: Add Event
+            - generic [ref=e124]:
+              - generic [ref=e127]:
+                - img [ref=e129]
+                - generic [ref=e131]:
+                  - paragraph [ref=e132]: This Week
+                  - paragraph [ref=e133]: "6"
+              - generic [ref=e136]:
+                - img [ref=e138]
+                - generic [ref=e140]:
+                  - paragraph [ref=e141]: Classes
+                  - paragraph [ref=e142]: "2"
+              - generic [ref=e145]:
+                - img [ref=e147]
+                - generic [ref=e152]:
+                  - paragraph [ref=e153]: Meetings
+                  - paragraph [ref=e154]: "2"
+              - generic [ref=e157]:
+                - img [ref=e159]
+                - generic [ref=e162]:
+                  - paragraph [ref=e163]: Today
+                  - paragraph [ref=e164]: "4"
+            - generic [ref=e167]:
+              - generic [ref=e168]:
+                - img [ref=e169]
+                - textbox "Search events..." [ref=e172]
+              - combobox [ref=e173] [cursor=pointer]:
+                - img [ref=e174]
+                - generic: All Types
+                - img [ref=e176]
+              - generic [ref=e178]:
+                - switch "Show Completed" [checked] [ref=e179] [cursor=pointer]
+                - generic [ref=e180]: Show Completed
+              - generic [ref=e181]:
+                - button "Day" [ref=e182] [cursor=pointer]
+                - button "Week" [ref=e183] [cursor=pointer]
+                - button "Month" [ref=e184] [cursor=pointer]
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - heading "Calendar" [level=3] [ref=e188]
+                - generic [ref=e189]:
+                  - generic [ref=e193]:
+                    - generic [ref=e194]:
+                      - generic [ref=e195]: May 2026
+                      - generic:
+                        - button "Go to previous month" [ref=e196] [cursor=pointer]:
+                          - img
+                        - button "Go to next month" [ref=e197] [cursor=pointer]:
+                          - img
+                    - grid "May 2026" [ref=e198]:
+                      - rowgroup [ref=e199]:
+                        - row "Sunday Monday Tuesday Wednesday Thursday Friday Saturday" [ref=e200]:
+                          - columnheader "Sunday" [ref=e201]: Su
+                          - columnheader "Monday" [ref=e202]: Mo
+                          - columnheader "Tuesday" [ref=e203]: Tu
+                          - columnheader "Wednesday" [ref=e204]: We
+                          - columnheader "Thursday" [ref=e205]: Th
+                          - columnheader "Friday" [ref=e206]: Fr
+                          - columnheader "Saturday" [ref=e207]: Sa
+                      - rowgroup [ref=e208]:
+                        - row "26 27 28 29 30 1 2" [ref=e209]:
+                          - gridcell "26" [ref=e210] [cursor=pointer]
+                          - gridcell "27" [ref=e211] [cursor=pointer]
+                          - gridcell "28" [ref=e212] [cursor=pointer]
+                          - gridcell "29" [ref=e213] [cursor=pointer]
+                          - gridcell "30" [ref=e214] [cursor=pointer]
+                          - gridcell "1" [ref=e215] [cursor=pointer]
+                          - gridcell "2" [selected] [ref=e216] [cursor=pointer]
+                        - row "3 4 5 6 7 8 9" [ref=e217]:
+                          - gridcell "3" [ref=e218] [cursor=pointer]
+                          - gridcell "4" [ref=e219] [cursor=pointer]
+                          - gridcell "5" [ref=e220] [cursor=pointer]
+                          - gridcell "6" [ref=e221] [cursor=pointer]
+                          - gridcell "7" [ref=e222] [cursor=pointer]
+                          - gridcell "8" [ref=e223] [cursor=pointer]
+                          - gridcell "9" [ref=e224] [cursor=pointer]
+                        - row "10 11 12 13 14 15 16" [ref=e225]:
+                          - gridcell "10" [ref=e226] [cursor=pointer]
+                          - gridcell "11" [ref=e227] [cursor=pointer]
+                          - gridcell "12" [ref=e228] [cursor=pointer]
+                          - gridcell "13" [ref=e229] [cursor=pointer]
+                          - gridcell "14" [ref=e230] [cursor=pointer]
+                          - gridcell "15" [ref=e231] [cursor=pointer]
+                          - gridcell "16" [ref=e232] [cursor=pointer]
+                        - row "17 18 19 20 21 22 23" [ref=e233]:
+                          - gridcell "17" [ref=e234] [cursor=pointer]
+                          - gridcell "18" [ref=e235] [cursor=pointer]
+                          - gridcell "19" [ref=e236] [cursor=pointer]
+                          - gridcell "20" [ref=e237] [cursor=pointer]
+                          - gridcell "21" [ref=e238] [cursor=pointer]
+                          - gridcell "22" [ref=e239] [cursor=pointer]
+                          - gridcell "23" [ref=e240] [cursor=pointer]
+                        - row "24 25 26 27 28 29 30" [ref=e241]:
+                          - gridcell "24" [ref=e242] [cursor=pointer]
+                          - gridcell "25" [ref=e243] [cursor=pointer]
+                          - gridcell "26" [ref=e244] [cursor=pointer]
+                          - gridcell "27" [ref=e245] [cursor=pointer]
+                          - gridcell "28" [ref=e246] [cursor=pointer]
+                          - gridcell "29" [ref=e247] [cursor=pointer]
+                          - gridcell "30" [ref=e248] [cursor=pointer]
+                        - row "31 1 2 3 4 5 6" [ref=e249]:
+                          - gridcell "31" [ref=e250] [cursor=pointer]
+                          - gridcell "1" [ref=e251] [cursor=pointer]
+                          - gridcell "2" [ref=e252] [cursor=pointer]
+                          - gridcell "3" [ref=e253] [cursor=pointer]
+                          - gridcell "4" [ref=e254] [cursor=pointer]
+                          - gridcell "5" [ref=e255] [cursor=pointer]
+                          - gridcell "6" [ref=e256] [cursor=pointer]
+                  - button "Go to Today" [ref=e258] [cursor=pointer]
+              - generic [ref=e259]:
+                - generic [ref=e261]:
+                  - heading "Week of Apr 27, 2026" [level=3] [ref=e262]:
+                    - img [ref=e263]
+                    - generic [ref=e265]: Week of Apr 27, 2026
+                  - generic [ref=e266]:
+                    - button [ref=e267] [cursor=pointer]:
+                      - img
+                    - button "Today" [ref=e268] [cursor=pointer]
+                    - button [ref=e269] [cursor=pointer]:
+                      - img
+                - generic [ref=e272]:
+                  - generic [ref=e273] [cursor=pointer]:
+                    - generic [ref=e274]:
+                      - paragraph [ref=e275]: Mon
+                      - paragraph [ref=e276]: "27"
+                    - generic [ref=e278]:
+                      - img [ref=e279]
+                      - paragraph [ref=e280]: Add event
+                  - generic [ref=e281] [cursor=pointer]:
+                    - generic [ref=e282]:
+                      - paragraph [ref=e283]: Tue
+                      - paragraph [ref=e284]: "28"
+                    - generic [ref=e286]:
+                      - img [ref=e287]
+                      - paragraph [ref=e288]: Add event
+                  - generic [ref=e289] [cursor=pointer]:
+                    - generic [ref=e290]:
+                      - paragraph [ref=e291]: Wed
+                      - paragraph [ref=e292]: "29"
+                    - generic [ref=e294]:
+                      - img [ref=e295]
+                      - paragraph [ref=e296]: Add event
+                  - generic [ref=e297] [cursor=pointer]:
+                    - generic [ref=e298]:
+                      - paragraph [ref=e299]: Thu
+                      - paragraph [ref=e300]: "30"
+                    - generic [ref=e302]:
+                      - img [ref=e303]
+                      - paragraph [ref=e304]: Add event
+                  - generic [ref=e305] [cursor=pointer]:
+                    - generic [ref=e306]:
+                      - paragraph [ref=e307]: Fri
+                      - paragraph [ref=e308]: "1"
+                    - generic [ref=e310]:
+                      - img [ref=e311]
+                      - paragraph [ref=e312]: Add event
+                  - generic [ref=e313] [cursor=pointer]:
+                    - generic [ref=e314]:
+                      - paragraph [ref=e315]: Sat
+                      - paragraph [ref=e316]: "2"
+                    - generic [ref=e317]:
+                      - generic [ref=e318]:
+                        - generic [ref=e319]:
+                          - img [ref=e320]
+                          - generic [ref=e323]: 09:00
+                        - paragraph [ref=e324]: Advanced Mathematics
+                        - generic [ref=e325]:
+                          - img [ref=e326]
+                          - generic [ref=e329]: Room B-204
+                      - generic [ref=e330]:
+                        - generic [ref=e331]:
+                          - img [ref=e332]
+                          - generic [ref=e335]: 11:00
+                        - paragraph [ref=e336]: Geometry Class
+                        - generic [ref=e337]:
+                          - img [ref=e338]
+                          - generic [ref=e341]: Room B-204
+                      - generic [ref=e342]:
+                        - generic [ref=e343]:
+                          - img [ref=e344]
+                          - generic [ref=e347]: 12:30
+                        - paragraph [ref=e348]: Lunch Break
+                      - generic [ref=e349]:
+                        - generic [ref=e350]:
+                          - img [ref=e351]
+                          - generic [ref=e354]: 14:00
+                        - paragraph [ref=e355]: Parent-Teacher Conferences
+                        - generic [ref=e356]:
+                          - img [ref=e357]
+                          - generic [ref=e360]: Conference Room
+                  - generic [ref=e361] [cursor=pointer]:
+                    - generic [ref=e362]:
+                      - paragraph [ref=e363]: Sun
+                      - paragraph [ref=e364]: "3"
+                    - generic [ref=e365]:
+                      - generic [ref=e366]:
+                        - generic [ref=e367]:
+                          - img [ref=e368]
+                          - generic [ref=e371]: 08:00
+                        - paragraph [ref=e372]: Department Meeting
+                        - generic [ref=e373]:
+                          - img [ref=e374]
+                          - generic [ref=e377]: Staff Room
+                      - generic [ref=e378]:
+                        - generic [ref=e379]:
+                          - img [ref=e380]
+                          - generic [ref=e383]: 15:00
+                        - paragraph [ref=e384]: Office Hours
+                        - generic [ref=e385]:
+                          - img [ref=e386]
+                          - generic [ref=e389]: Room B-204
+            - generic [ref=e390]:
+              - heading "Quick Actions" [level=3] [ref=e392]
+              - generic [ref=e394]:
+                - button "Add Class" [ref=e395] [cursor=pointer]:
+                  - img
+                  - generic [ref=e396]: Add Class
+                - button "Add Meeting" [ref=e397] [cursor=pointer]:
+                  - img
+                  - generic [ref=e398]: Add Meeting
+                - button "Add Exam" [ref=e399] [cursor=pointer]:
+                  - img
+                  - generic [ref=e400]: Add Exam
+                - button "Office Hours" [ref=e401] [cursor=pointer]:
+                  - img
+                  - generic [ref=e402]: Office Hours
+    - region "Notifications (F8)":
+      - list [ref=e404]:
+        - status [ref=e405]:
+          - generic [ref=e406]:
+            - generic [ref=e407]: Welcome back!
+            - generic [ref=e408]: You have been signed in successfully.
+          - button [ref=e409] [cursor=pointer]:
+            - img [ref=e410]
+    - region "Notifications alt+T"
+  - complementary "Edit with Lovable" [ref=e414]:
+    - link "Edit with Lovable" [ref=e415] [cursor=pointer]:
+      - /url: https://lovable.dev/projects/e72892f5-1e19-494d-a0dd-fac4aaf73da4?utm_source=lovable-badge
+      - generic [ref=e416]: Edit with
+      - img [ref=e417]
+    - button "Dismiss" [ref=e422] [cursor=pointer]:
+      - img [ref=e423]
+  - status [ref=e425]: Notification Welcome back!You have been signed in successfully.
+```
