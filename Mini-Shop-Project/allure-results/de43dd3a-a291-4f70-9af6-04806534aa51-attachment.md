@@ -1,0 +1,71 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e10]:
+        - img "ClassPilot Logo" [ref=e14]
+        - heading "ClassPilot" [level=1] [ref=e15]
+        - paragraph [ref=e16]: Your complete education management platform
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - img [ref=e20]
+            - generic [ref=e23]:
+              - paragraph [ref=e24]: Smart Attendance
+              - paragraph [ref=e25]: Track attendance effortlessly with one click
+          - generic [ref=e26]:
+            - img [ref=e28]
+            - generic [ref=e33]:
+              - paragraph [ref=e34]: Grade Analytics
+              - paragraph [ref=e35]: Visualize student performance trends
+          - generic [ref=e36]:
+            - img [ref=e38]
+            - generic [ref=e43]:
+              - paragraph [ref=e44]: Parent Portal
+              - paragraph [ref=e45]: Keep families connected and informed
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - img [ref=e48]
+            - generic [ref=e51]: Secure & Private
+          - generic [ref=e53]:
+            - img [ref=e54]
+            - generic [ref=e57]: FERPA Compliant
+      - generic [ref=e62]:
+        - generic [ref=e64]:
+          - heading "Welcome Back" [level=3] [ref=e65]
+          - paragraph [ref=e66]: Enter your credentials to access your account
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - tablist [ref=e69]:
+              - tab "Sign In" [selected] [ref=e70] [cursor=pointer]
+              - tab "Sign Up" [ref=e71] [cursor=pointer]
+            - tabpanel "Sign In" [ref=e72]:
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - text: Email Address
+                  - generic [ref=e75]:
+                    - img [ref=e77]
+                    - textbox "Email Address" [ref=e80]:
+                      - /placeholder: hello@example.com
+                - generic [ref=e81]:
+                  - text: Password
+                  - generic [ref=e82]:
+                    - img [ref=e84]
+                    - textbox "Password" [ref=e87]:
+                      - /placeholder: ••••••••
+                - button "Sign In" [ref=e88] [cursor=pointer]:
+                  - text: Sign In
+                  - img
+          - paragraph [ref=e90]: By continuing, you agree to our Terms of Service and Privacy Policy.
+    - region "Notifications (F8)":
+      - list
+    - region "Notifications alt+T"
+  - complementary "Edit with Lovable" [ref=e91]:
+    - link "Edit with Lovable" [ref=e92] [cursor=pointer]:
+      - /url: https://lovable.dev/projects/e72892f5-1e19-494d-a0dd-fac4aaf73da4?utm_source=lovable-badge
+      - generic [ref=e93]: Edit with
+      - img [ref=e94]
+    - button "Dismiss" [ref=e99] [cursor=pointer]:
+      - img [ref=e100]
+```
