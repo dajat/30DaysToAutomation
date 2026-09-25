@@ -49,8 +49,8 @@ Each day introduces new tasks, enhancements, or refactoring steps to evolve the 
 
 ## 🛠️ Tech Stack  
 ### **Core Tools**
-- **Playwright** or **Selenium** (depending on project)
-- **Node.js / JavaScript** or **Python** (your chosen language)
+- **Playwright**
+- **Node.js / JavaScript**
 - **Git & GitHub** for version control
 - **Allure** or **HTML Reports** for test reporting
 
@@ -122,7 +122,4 @@ Each project folder contains its own README with:
 - How to run tests  
 - Framework architecture  
 - Example test cases  
-
-Daily logs or notes may be included under a `/docs` folder.
-
 ---
