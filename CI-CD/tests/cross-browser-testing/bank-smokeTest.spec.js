@@ -4,7 +4,7 @@ import { BankLoginPage } from '../../pages/bank/banklogin.js';
 import { DashboardPage } from '../../pages/bank/dashboardpage.js';
 import { bankUser } from '../../test-data/credentials.js';
 
-test.describe('CBT Smoke – same scenarios, multiple browsers', () => {
+test.describe('Cross-browser smoke tests', () => {
   test('Shop landing opens and Products page loads', async ({ page }, testInfo) => {
     console.log(`Running on: ${testInfo.project.name}`);
     const shop = new ShopLandingPage(page);
@@ -14,13 +14,14 @@ test.describe('CBT Smoke – same scenarios, multiple browsers', () => {
     await expect(page).toHaveURL(/\/products/);
   });
 
-  test('Bank login + dashboard smoke', async ({ page }, testInfo) => {
+  test('Bank login + dashboard smoke', async ({ page }, testInfo }) => {
+    test.skip(!bankUser.email || !bankUser.password, 'Set BANK_EMAIL and BANK_PASSWORD to run the bank smoke test.');
     console.log(`Running on: ${testInfo.project.name}`);
     const login = new BankLoginPage(page);
     await login.goto();
-    await login.login({ email: bankUser.email, password: bankUser.password });
+    await login.login(bankUser);
 
-    const dash = new DashboardPage(page);
-    await dash.assertLoaded();
+    const dashboard = new DashboardPage(page);
+    await dashboard.assertLoaded();
   });
 });
