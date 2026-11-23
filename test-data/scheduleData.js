@@ -1,4 +1,5 @@
-import { expect } from '@playwright/test'; 
+import { expect } from '@playwright/test';
+import { DateUtils } from '../utils/dateUtil.js'; 
 
 export class ScheduleData {
   constructor(page) {
@@ -9,12 +10,12 @@ export class ScheduleData {
     this.pageSubtitle = page.locator('p').filter({ hasText: "Manage your daily schedule and events" });
     this.scheduleTab = page.getByRole('link', { name: /Schedule/i });
     this.todayButton = page.getByRole('button', { name: /Go to today/i }).first();
-    this.clickTodayButton = page.getByRole('button', { name: /Today/i })
+    this.clickTodayButton = page.getByRole('button', { name: 'Today', exact: true })
     this.scheduleHeader = page.getByRole('heading', { name: /Calendar/i });
     this.bannerDate = page.locator('header p').nth(1); 
     this.newEvents = scheduleData.newEvents; 
     this.eventUpdates = scheduleData.eventUpdates; // Added this so T-05 and T-06 work too
-    this.todaysDateLocator = page.getByText('Saturday, May 2, 2026');
+    this.todaysDateLocator = page.getByText(DateUtils.getFormattedDate(), { exact: true });
 
     // Form/Modal Locators
     this.addEventButton = page.getByRole('button', { name: /Add Event/i });
