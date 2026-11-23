@@ -59,6 +59,7 @@ export class ScheduleData {
     await this.verifyEventPresent(eventData.title);
   }
 
+  /** Select a scheduled time from a native select or custom dropdown. */
   async selectTime(label, time24h) {
     const [hours, minutes] = time24h.split(':').map(Number);
     const time12h = String(hours % 12 || 12) + ':' + String(minutes).padStart(2, '0') + ' ' + (hours >= 12 ? 'PM' : 'AM');
@@ -67,25 +68,69 @@ export class ScheduleData {
     if (await control.count() === 0) control = this.page.getByLabel(labelPattern);
     if (await control.count() === 0) {
       const dropdowns = this.page.getByRole('combobox');
-      if (await dropdowns.count() < 3) throw new Error('Cannot find ' + label + ' dropdown; inspect its accessible label and role.');
+      if (await dropdowns.count() < 3) {
+        throw new Error('Cannot locate ' + label + ' dropdown. Found ' + await dropdowns.count() + ' comboboxes.');
+      }
+      // Fallback for an unlabeled form: event type, start time, end time.
       control = dropdowns.nth(label === 'Start Time' ? 1 : 2);
     }
     control = control.first();
     const tag = await control.evaluate(el => el.tagName.toLowerCase());
+    const normalize = value => String(value || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    const desired = [normalize(time24h), normalize(time12h)];
+    const matchesTime = text => {
+      const value = normalize(text);
+      return desired.some(time => value === time || value.startsWith(time + ' ') || value.startsWith(time + '–') || value.startsWith(time + '-'));
+    };
     if (tag === 'select') {
-      const options = await control.locator('option').evaluateAll(elements => elements.map(el => ({ value: el.value, text: el.textContent.trim() })));
-      const match = options.find(o => [time24h, time12h].includes(o.value) || [time24h, time12h].includes(o.text));
-      if (!match) throw new Error('No ' + label + ' option for ' + time24h + ' or ' + time12h);
-      await control.selectOption(match.value);
+      const available = await control.locator('option').evaluateAll(els => els.map(el => ({ value: el.value, text: el.textContent.trim() })));
+      const found = available.find(o => matchesTime(o.text) || matchesTime(o.value));
+      if (!found) throw new Error(label + ' native select contains no matching time for ' + time12h + '. Options: ' + JSON.stringify(available.slice(0, 30)));
+      await control.selectOption(found.value);
       return;
     }
+
     await control.click();
     const options = this.page.getByRole('option');
-    const match24 = options.filter({ hasText: new RegExp('^' + time24h + '$', 'i') });
-    const match12 = options.filter({ hasText: new RegExp('^' + time12h + '$', 'i') });
-    if (await match24.count() > 0) await match24.first().click();
-    else if (await match12.count() > 0) await match12.first().click();
-    else throw new Error('No accessible ' + label + ' option for ' + time24h + ' or ' + time12h);
+    // Playwright count() does not wait. Give asynchronously rendered menus time to appear.
+    try {
+      await expect.poll(async () => await options.count(), { timeout: 1500, intervals: [100, 200, 300] }).toBeGreaterThan(0);
+    } catch {
+      // Some custom dropdowns use plain buttons rather than role=option.
+    }
+    const optionTexts = await options.allTextContents();
+    const index = optionTexts.findIndex(matchesTime);
+    if (index !== -1) {
+      await options.nth(index).click();
+      return;
+    }
+
+    for (const time of [time12h, time24h]) {
+      const byText = this.page.getByText(time, { exact: true });
+      const buttons = this.page.getByRole('button', { name: time, exact: true });
+      if (await buttons.count() > 0 && await buttons.first().isVisible()) {
+        await buttons.first().click();
+        return;
+      }
+      if (await byText.count() > 0 && await byText.first().isVisible()) {
+        await byText.first().click();
+        return;
+      }
+    }
+
+    const controls = await this.page.getByRole('combobox').evaluateAll(els => els.map(el => ({
+      label: el.getAttribute('aria-label'),
+      role: el.getAttribute('role'),
+      text: (el.textContent || '').trim().slice(0, 90)
+    })));
+    throw new Error(
+      'Cannot select ' + label + ' (' + time24h + ' / ' + time12h + '). ' +
+      'Opened control: ' + JSON.stringify(await control.evaluate(el => ({
+        label: el.getAttribute('aria-label'),
+        text: (el.textContent || '').trim().slice(0, 120)
+      }))) + '. Accessible option texts: ' + JSON.stringify(optionTexts.slice(0, 40)) +
+      '. Comboboxes: ' + JSON.stringify(controls) + '. Please share this diagnostic.'
+    );
   }
   async verifyEventPresent(title) {
     await expect(this.page.getByText(title, { exact: true }).first()).toBeVisible();
