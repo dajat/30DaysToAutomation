@@ -63,16 +63,16 @@ export class ScheduleData {
   async selectTime(label, time24h) {
     const [hours, minutes] = time24h.split(':').map(Number);
     const time12h = String(hours % 12 || 12) + ':' + String(minutes).padStart(2, '0') + ' ' + (hours >= 12 ? 'PM' : 'AM');
-    const labelPattern = new RegExp(label, 'i');
-    let control = this.page.getByRole('combobox', { name: labelPattern });
-    if (await control.count() === 0) control = this.page.getByLabel(labelPattern);
+    // The event form has several dropdowns (Type, Subject, Start Time, End Time).
+    // In the recording, the old nth(1) fallback opens Subject, not Start Time.
+    const placeholder = label === 'Start Time' ? /select start time/i : /select end time/i;
+    let control = this.page.getByRole('combobox').filter({ hasText: placeholder });
+    if (await control.count() === 0) control = this.page.getByText(placeholder, { exact: true });
+    if (await control.count() === 0) control = this.page.getByRole('combobox', { name: new RegExp(label, 'i') });
+    if (await control.count() === 0) control = this.page.getByLabel(new RegExp(label, 'i'));
     if (await control.count() === 0) {
-      const dropdowns = this.page.getByRole('combobox');
-      if (await dropdowns.count() < 3) {
-        throw new Error('Cannot locate ' + label + ' dropdown. Found ' + await dropdowns.count() + ' comboboxes.');
-      }
-      // Fallback for an unlabeled form: event type, start time, end time.
-      control = dropdowns.nth(label === 'Start Time' ? 1 : 2);
+      const comboboxes = await this.page.getByRole('combobox').allTextContents();
+      throw new Error('Could not find ' + label + ' dropdown; expected placeholder Select ' + label.toLowerCase() + '. Combobox texts: ' + JSON.stringify(comboboxes));
     }
     control = control.first();
     const tag = await control.evaluate(el => el.tagName.toLowerCase());
