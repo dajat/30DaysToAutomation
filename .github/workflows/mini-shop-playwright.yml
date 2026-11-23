@@ -12,6 +12,10 @@ on:
       - "Mini-Shop-Project/**"
       - ".github/workflows/mini-shop-playwright.yml"
 
+concurrency:
+  group: mini-shop-tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     timeout-minutes: 60
