@@ -1,192 +1,98 @@
 import { expect } from '@playwright/test';
 
 class StudentPage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
   constructor(page) {
     this.page = page;
-    
-    // Locators
-    this.pageTitle = page.locator('h1', { hasText: 'Student Management' });
-    this.pageSubtitle = page.locator('text=Manage your students and their information');
-    this.addStudentButton = page.locator('button', { hasText: 'Add Student' });
-    this.searchInput = page.locator('input[placeholder="Search students..."]');
-    this.studentCountBadge = page.locator('text=/\\d+ Students/');
+    this.pageTitle = page.getByRole('heading', { name: 'Student Management' });
+    this.pageSubtitle = page.getByText('Manage your students and their information');
+    this.addStudentButton = page.getByRole('button', { name: 'Add Student' });
+    this.searchInput = page.getByPlaceholder('Search students...');
+    this.studentCountBadge = page.getByText(/\d+\s+Students?/i);
     this.studentTab = page.getByRole('link', { name: /Students/i });
-    
-    // Modal locators
-    this.modal = page.locator('div[role="dialog"]');
-    this.modalTitle = this.modal.locator('h2', { hasText: 'Add New Student' });
-    this.inputStudentName = this.modal.locator('input[placeholder*="Enter full name"]');
-    this.inputStudentEmail = this.modal.locator('input[placeholder*="student@email.com"]');
-    this.inputPhone = this.modal.locator('input[placeholder*="(555) 123-4567"]');
-    this.inputAddress = this.modal.locator('input[placeholder*="Full address"]');
-    this.selectGrade = this.modal.locator('button:has-text("Select grade")');
-    this.inputParentName = this.modal.locator('input[placeholder*="Parent/Guardian name"]');
-    this.inputParentEmail = this.modal.locator('input[placeholder*="parent@email.com"]');
-    this.submitButton = this.modal.locator('button', { hasText: 'Add Student' });
-    this.cancelButton = this.modal.locator('button', { hasText: 'Cancel' });
-    
-    // Student card locators
-  this.studentCards = page.locator('div:has(button:has-text("Edit"))').filter({ has: page.locator('text=/Grade \\d+/') });
-  this.existingStudents = [
+
+    this.modal = page.getByRole('dialog');
+    this.inputStudentName = this.modal.getByPlaceholder('Enter full name');
+    this.inputStudentEmail = this.modal.getByPlaceholder('student@email.com');
+    this.inputPhone = this.modal.getByPlaceholder('(555) 123-4567');
+    this.inputAddress = this.modal.getByPlaceholder('Full address');
+    this.selectGrade = this.modal.getByRole('button', { name: /Select grade/i });
+    this.inputParentName = this.modal.getByPlaceholder('Parent/Guardian name');
+    this.inputParentEmail = this.modal.getByPlaceholder('parent@email.com');
+    this.submitButton = this.modal.getByRole('button', { name: 'Add Student' });
+    this.cancelButton = this.modal.getByRole('button', { name: 'Cancel' });
+
+    this.existingStudents = [
       { name: 'Emma Johnson' },
       { name: 'Michael Chen' },
       { name: 'Sofia Rodriguez' }
     ];
-
     this.newStudents = [
       {
-        name: 'John Doe',
-        email: 'john.doe@email.com',
-        grade: 'Grade 10',
-        phone: '(555) 000-1111',
-        address: '123 Test St',
-        parentName: 'Jane Doe',
-        parentEmail: 'jane.doe@email.com'
+        name: 'John Doe', email: 'john.doe@email.com', grade: 'Grade 10',
+        phone: '(555) 000-1111', address: '123 Test St',
+        parentName: 'Jane Doe', parentEmail: 'jane.doe@email.com'
       },
-      {
-        name: 'Alice Smith', // This matches TC-04's reference to newStudents[1]
-        email: 'alice.s@email.com',
-        grade: 'Grade 11'
-      }
+      { name: 'Alice Smith', email: 'alice.s@email.com', grade: 'Grade 11' }
     ];
-    // --------------------------------
   }
 
-//Assertions
   async navigate() {
     await this.studentTab.click();
-    await this.pageTitle.waitFor({ state: 'visible' });
+    await expect(this.pageTitle).toBeVisible();
   }
 
-  /**
-   * Get the page title text
-   * @returns {Promise<string>}
-   */
   async getPageTitle() {
-    return await this.pageTitle.textContent();
+    return this.pageTitle.textContent();
   }
 
   async verifyPageTitle() {
-    await this.studentTab.click();
     await expect(this.pageTitle).toHaveText('Student Management');
   }
 
-  /**
-   * Get a student card by name
-   * @param {string} studentName - The name of the student
-   * @returns {import('@playwright/test').Locator}
-   */
   getStudentCardByName(studentName) {
-    return this.page.locator(`div:has-text("${studentName}")`).filter({ has: this.page.locator('text=/Grade \\d+/') }).first();
+    return this.page.locator('div').filter({ hasText: studentName })
+      .filter({ has: this.page.getByText(/Grade \d+/) }).last();
   }
 
-  /**
-   * Verify a student is present on the page
-   * @param {string} studentName - The name of the student to verify
-   */
   async verifyStudentPresent(studentName) {
-    const studentCard = this.getStudentCardByName(studentName);
-    await expect(studentCard).toBeVisible();
+    await expect(this.getStudentCardByName(studentName)).toBeVisible();
   }
 
-  /**
-   * Get the total number of students displayed
-   * @returns {Promise<number>}
-   */
   async getStudentCount() {
+    await expect(this.studentCountBadge).toBeVisible();
     const badgeText = await this.studentCountBadge.textContent();
-    const match = badgeText.match(/(\d+)/);
-    return match ? parseInt(match[1]) : 0;
+    const match = badgeText?.match(/(\d+)/);
+    if (!match) throw new Error(`Could not parse student count from: ${badgeText}`);
+    return Number(match[1]);
   }
 
-  /**
-   * Click the Add Student button to open the modal
-   */
   async clickAddStudent() {
     await this.addStudentButton.click();
-    await this.modal.waitFor({ state: 'visible' });
+    await expect(this.modal).toBeVisible();
   }
 
-  /**
-   * Select a grade from the dropdown
-   * @param {string} grade - Grade to select (e.g., "Grade 10")
-   */
   async selectGradeOption(grade) {
     await this.selectGrade.click();
-    await this.page.locator(`div[role="option"]:has-text("${grade}")`).click();
+    await this.page.getByRole('option', { name: grade, exact: true }).click();
   }
 
-  /**
-   * Add a new student with complete details
-   * @param {Object} studentData - Student information
-   * @param {string} studentData.name - Full name
-   * @param {string} studentData.email - Student email
-   * @param {string} studentData.grade - Grade level (e.g., "Grade 10")
-   * @param {string} [studentData.phone] - Phone number (optional)
-   * @param {string} [studentData.address] - Address (optional)
-   * @param {string} [studentData.parentName] - Parent/Guardian name (optional)
-   * @param {string} [studentData.parentEmail] - Parent email (optional)
-   */
   async addStudent(studentData) {
-    // Open modal
     await this.clickAddStudent();
-    
-    // Fill required fields
     await this.inputStudentName.fill(studentData.name);
     await this.inputStudentEmail.fill(studentData.email);
     await this.selectGradeOption(studentData.grade);
-    
-    // Fill optional fields if provided
-    if (studentData.phone) {
-      await this.inputPhone.fill(studentData.phone);
-    }
-    
-    if (studentData.address) {
-      await this.inputAddress.fill(studentData.address);
-    }
-    
-    if (studentData.parentName) {
-      await this.inputParentName.fill(studentData.parentName);
-    }
-    
-    if (studentData.parentEmail) {
-      await this.inputParentEmail.fill(studentData.parentEmail);
-    }
-    
-    // Submit
+
+    if (studentData.phone) await this.inputPhone.fill(studentData.phone);
+    if (studentData.address) await this.inputAddress.fill(studentData.address);
+    if (studentData.parentName) await this.inputParentName.fill(studentData.parentName);
+    if (studentData.parentEmail) await this.inputParentEmail.fill(studentData.parentEmail);
+
     await this.submitButton.click();
-    
-    // Wait for modal to close
-    await this.modal.waitFor({ state: 'hidden' });
+    await expect(this.modal).toBeHidden();
   }
 
-  /**
-   * Search for a student by name
-   * @param {string} searchTerm - Search term
-   */
   async searchStudent(searchTerm) {
     await this.searchInput.fill(searchTerm);
-    await this.page.waitForTimeout(500); // Wait for search to filter
-  }
-
-  /**
-   * Get all visible student names
-   * @returns {Promise<string[]>}
-   */
-  async getAllStudentNames() {
-    const cards = await this.studentCards.all();
-    const names = [];
-    
-    for (const card of cards) {
-      const nameElement = card.locator('text=/^[A-Z][a-z]+ [A-Z][a-z]+$/').first();
-      const name = await nameElement.textContent();
-      names.push(name.trim());
-    }
-    
-    return names;
   }
 }
 
