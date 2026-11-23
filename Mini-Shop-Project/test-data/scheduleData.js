@@ -1,23 +1,20 @@
 import { expect } from '@playwright/test';
-import { DateUtils } from '../utils/dateUtil.js'; 
+import { DateUtils } from '../utils/dateUtil.js';
 
 export class ScheduleData {
   constructor(page) {
     this.page = page;
-
-    // Core Nav & Layout
     this.pageTitle = page.getByRole('heading', { name: /Class Schedule/i });
-    this.pageSubtitle = page.locator('p').filter({ hasText: "Manage your daily schedule and events" });
+    this.pageSubtitle = page.locator('p').filter({ hasText: 'Manage your daily schedule and events' });
     this.scheduleTab = page.getByRole('link', { name: /Schedule/i });
     this.todayButton = page.getByRole('button', { name: /Go to today/i }).first();
-    this.clickTodayButton = page.getByRole('button', { name: 'Today', exact: true })
+    this.clickTodayButton = page.getByRole('button', { name: 'Today', exact: true });
     this.scheduleHeader = page.getByRole('heading', { name: /Calendar/i });
-    this.bannerDate = page.locator('header p').nth(1); 
-    this.newEvents = scheduleData.newEvents; 
-    this.eventUpdates = scheduleData.eventUpdates; // Added this so T-05 and T-06 work too
+    this.bannerDate = page.locator('header p').nth(1);
+    this.newEvents = scheduleData.newEvents;
+    this.eventUpdates = scheduleData.eventUpdates;
     this.todaysDateLocator = page.getByText(DateUtils.getFormattedDate(), { exact: true });
 
-    // Form/Modal Locators
     this.addEventButton = page.getByRole('button', { name: /Add Event/i });
     this.eventTitleInput = page.getByPlaceholder(/Event title/i);
     this.eventLocationInput = page.getByPlaceholder(/Location/i);
@@ -30,6 +27,7 @@ export class ScheduleData {
 
   async navigate() {
     await this.scheduleTab.click();
+    await expect(this.pageTitle).toBeVisible();
   }
 
   async hoverToday() {
@@ -40,43 +38,49 @@ export class ScheduleData {
     await this.clickTodayButton.click();
   }
 
-  async addEvent(scheduleDataInfo) {
+  async addEvent(eventData) {
     await this.addEventButton.click();
-    await this.eventTitleInput.fill(scheduleDataInfo.title);
+    await expect(this.eventTitleInput).toBeVisible();
+    await this.eventTitleInput.fill(eventData.title);
 
-    if (scheduleDataInfo.location) await this.eventLocationInput.fill(scheduleDataInfo.location);
-    if (scheduleDataInfo.startTime) await this.startTimeInput.fill(scheduleDataInfo.startTime);
-    if (scheduleDataInfo.endTime) await this.endTimeInput.fill(scheduleDataInfo.endTime);
-    if (scheduleDataInfo.description) await this.descriptionInput.fill(scheduleDataInfo.description);
+    if (eventData.location) await this.eventLocationInput.fill(eventData.location);
+    if (eventData.startTime) await this.startTimeInput.fill(eventData.startTime);
+    if (eventData.endTime) await this.endTimeInput.fill(eventData.endTime);
+    if (eventData.description) await this.descriptionInput.fill(eventData.description);
 
-    if (scheduleDataInfo.type) {
-      await this.page.getByRole('option', { name: scheduleDataInfo.type }).click().catch(() => {});
+    if (eventData.type) {
+      await this.eventTypeSelect.click();
+      await this.page.getByRole('option', { name: eventData.type, exact: true }).click();
     }
 
     await this.saveButton.click();
-    await this.page.waitForLoadState('networkidle');
+    await expect(this.eventTitleInput).toBeHidden();
+    await this.verifyEventPresent(eventData.title);
   }
 
   async verifyEventPresent(title) {
-    await expect(this.page.getByText(title).first()).toBeVisible();
+    await expect(this.page.getByText(title, { exact: true }).first()).toBeVisible();
   }
 
   getEventCardByTitle(title) {
-    return this.page.locator('div').filter({ hasText: title }).last();
+    return this.page.locator('div').filter({ has: this.page.getByText(title, { exact: true }) }).last();
   }
 
   async editEvent(oldTitle, newData) {
     const eventCard = this.getEventCardByTitle(oldTitle);
     await eventCard.getByRole('button', { name: /edit/i }).click();
+    await expect(this.eventTitleInput).toBeVisible();
 
     if (newData.title) await this.eventTitleInput.fill(newData.title);
     if (newData.location) await this.eventLocationInput.fill(newData.location);
 
     await this.saveButton.click();
+    await expect(this.eventTitleInput).toBeHidden();
+    await this.verifyEventPresent(newData.title || oldTitle);
   }
 
   async getScheduleHeaderText() {
-    return await this.scheduleHeader.textContent();
+    return this.scheduleHeader.textContent();
   }
 
   async verifyPageTitle() {
@@ -91,50 +95,40 @@ export class ScheduleData {
 export const scheduleData = {
   newEvents: [
     {
-      title: "event 1",
-      location: "Conference Room A",
-      type: "Meeting",
-      startTime: "10:00",
-      endTime: "11:00",
-      description: "Discuss project updates and next steps."
+      title: 'event 1',
+      location: 'Conference Room A',
+      type: 'Meeting',
+      startTime: '10:00',
+      endTime: '11:00',
+      description: 'Discuss project updates and next steps.'
     },
     {
-      title: "event 2",
-      location: "Health Clinic",
-      type: "Personal",
-      startTime: "14:00",
-      endTime: "15:00",
-      description: "Annual check-up with Dr. Smith."
+      title: 'event 2',
+      location: 'Health Clinic',
+      type: 'Personal',
+      startTime: '14:00',
+      endTime: '15:00',
+      description: 'Annual check-up with Dr. Smith.'
     },
     {
-      title: "event 3",
-      location: "Fitness Center",
-      type: "Exercise",
-      startTime: "18:00",
-      endTime: "19:00",
-      description: "Evening yoga session for relaxation."
+      title: 'event 3',
+      location: 'Fitness Center',
+      type: 'Exercise',
+      startTime: '18:00',
+      endTime: '19:00',
+      description: 'Evening yoga session for relaxation.'
     },
     {
-      title: "event 4",
-      location: "Downtown Restaurant",
-      type: "Social",
-      startTime: "20:00",
-      endTime: "22:00",
-      description: "Catch up with friends over dinner."
+      title: 'event 4',
+      location: 'Downtown Restaurant',
+      type: 'Social',
+      startTime: '20:00',
+      endTime: '22:00',
+      description: 'Catch up with friends over dinner.'
     }
   ],
   eventUpdates: [
-    {
-      newData: {
-        title: "Updated Team Meeting",
-        location: "Conference Room B"
-      }
-    },
-    {
-      newData: {
-        title: "Updated Doctor's Appointment",
-        location: "Health Clinic - Room 202"
-      }
-    }
+    { newData: { title: 'Updated Team Meeting', location: 'Conference Room B' } },
+    { newData: { title: "Updated Doctor's Appointment", location: 'Health Clinic - Room 202' } }
   ]
 };
