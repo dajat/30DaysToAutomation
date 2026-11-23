@@ -1,14 +1,6 @@
-const required = (name) => {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
-  }
-  return value;
-};
-
 export const bankUser = {
-  email: required('BANK_EMAIL'),
-  password: required('BANK_PASSWORD')
+  email: process.env.BANK_EMAIL || '',
+  password: process.env.BANK_PASSWORD || ''
 };
 
 export const shopUser = {
