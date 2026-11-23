@@ -1,0 +1,38 @@
+name: Mini-Shop Playwright Tests
+
+on:
+  push:
+    branches: [main, master, "fix/**"]
+    paths:
+      - "Mini-Shop-Project/**"
+      - ".github/workflows/mini-shop-playwright.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "Mini-Shop-Project/**"
+      - ".github/workflows/mini-shop-playwright.yml"
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Mini-Shop-Project
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run Mini-Shop Playwright tests
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mini-shop-playwright-report
+          path: Mini-Shop-Project/playwright-report/
+          retention-days: 30
