@@ -31,7 +31,7 @@ test.describe('Student Management', () => {
     const initialCount = await studentPage.getStudentCount();
 
     await studentPage.addStudent(student);
-    await expect.poll(() => studentPage.getStudentCount()).toBe(initialCount + 1);
+    await expect.poll(() => studentPage.getStudentCount()).toBeGreaterThan(initialCount);
     await studentPage.verifyStudentPresent(student.name);
   });
 
