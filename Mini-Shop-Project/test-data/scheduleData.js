@@ -16,14 +16,15 @@ export class ScheduleData {
     this.todaysDateLocator = page.getByText(DateUtils.getFormattedDate(), { exact: true });
 
     this.addEventButton = page.getByRole('button', { name: /Add Event/i });
-    this.eventTitleInput = page.getByPlaceholder(/Event title/i);
-    this.eventLocationInput = page.getByPlaceholder(/Location/i);
-    this.eventTypeSelect = page.getByRole('combobox').first();
+    this.eventDialog = page.getByRole('dialog');
+    this.eventTitleInput = this.eventDialog.getByPlaceholder(/Enter event title/i);
+    this.eventLocationInput = this.eventDialog.getByPlaceholder(/Room or location/i);
+    this.eventTypeSelect = this.eventDialog.getByRole('combobox').first();
     // Time controls may be native selects or accessible custom dropdowns.
     // Resolve them when the Add Event form is open, not before.
 
-    this.descriptionInput = page.getByPlaceholder(/Description/i);
-    this.saveButton = page.getByRole('button', { name: /Save|Submit|Add Event/i });
+    this.descriptionInput = this.eventDialog.getByPlaceholder('Additional details...', { exact: true });
+    this.saveButton = this.eventDialog.getByRole('button', { name: /^(Schedule Event|Update Event|Save Changes|Save|Submit)$/i });
   }
 
   async navigate() {
@@ -44,15 +45,16 @@ export class ScheduleData {
     await expect(this.eventTitleInput).toBeVisible();
     await this.eventTitleInput.fill(eventData.title);
 
-    if (eventData.location) await this.eventLocationInput.fill(eventData.location);
-    if (eventData.startTime) await this.selectTime('Start Time', eventData.startTime);
-    if (eventData.endTime) await this.selectTime('End Time', eventData.endTime);
-    if (eventData.description) await this.descriptionInput.fill(eventData.description);
-
+    // Choose the event type before filling the remaining fields, since it can alter the form.
     if (eventData.type) {
       await this.eventTypeSelect.click();
       await this.page.getByRole('option', { name: eventData.type, exact: true }).click();
     }
+
+    if (eventData.location) await this.eventLocationInput.fill(eventData.location);
+    if (eventData.startTime) await this.selectTime('Start Time', eventData.startTime);
+    if (eventData.endTime) await this.selectTime('End Time', eventData.endTime);
+    if (eventData.description) await this.descriptionInput.fill(eventData.description);
 
     await this.saveButton.click();
     await expect(this.eventTitleInput).toBeHidden();
