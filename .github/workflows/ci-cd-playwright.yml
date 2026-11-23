@@ -12,6 +12,10 @@ on:
       - "CI-CD/**"
       - ".github/workflows/ci-cd-playwright.yml"
 
+concurrency:
+  group: ci-cd-tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     timeout-minutes: 60
