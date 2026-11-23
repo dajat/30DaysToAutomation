@@ -59,106 +59,34 @@ export class ScheduleData {
     await this.verifyEventPresent(eventData.title);
   }
 
-  /** Select a time from a native select or an accessible dropdown. */
   async selectTime(label, time24h) {
     const [hours, minutes] = time24h.split(':').map(Number);
-    const time12h = `${hours % 12 || 12}:${String(minutes).padStart(2, '0')} ${hours >= 12 ? 'PM' : 'AM'}`;
+    const time12h = String(hours % 12 || 12) + ':' + String(minutes).padStart(2, '0') + ' ' + (hours >= 12 ? 'PM' : 'AM');
     const labelPattern = new RegExp(label, 'i');
-
-    // Prefer explicitly labelled controls; fall back to dropdown order only
-    // when the UI provides no accessible label (event type, start, end).
     let control = this.page.getByRole('combobox', { name: labelPattern });
     if (await control.count() === 0) control = this.page.getByLabel(labelPattern);
     if (await control.count() === 0) {
       const dropdowns = this.page.getByRole('combobox');
-      if (await dropdowns.count() >= 3) {
-        control = dropdowns.nth(label === 'Start Time' ? 1 : 2);
-      } else {
-        throw new Error(`Cannot find ${label} dropdown. Inspect the Add Event form's accessible labels and roles.`);
-      }
+      if (await dropdowns.count() < 3) throw new Error('Cannot find ' + label + ' dropdown; inspect its accessible label and role.');
+      control = dropdowns.nth(label === 'Start Time' ? 1 : 2);
     }
-
-    const tag = await control.first().evaluate(el => el.tagName.toLowerCase());
+    control = control.first();
+    const tag = await control.evaluate(el => el.tagName.toLowerCase());
     if (tag === 'select') {
-      const options = await control.first().locator('option').evaluateAll(elements =>
-        elements.map(el => ({ value: el.value, text: el.textContent.trim() }))
-      );
+      const options = await control.locator('option').evaluateAll(elements => elements.map(el => ({ value: el.value, text: el.textContent.trim() })));
       const match = options.find(o => [time24h, time12h].includes(o.value) || [time24h, time12h].includes(o.text));
-      if (!match) throw new Error(`No ${label} option for ${time24h} (${time12h}). Available: ${options.map(o => o.text).join(', ')}`);
-      await control.first().selectOption(match.value);
+      if (!match) throw new Error('No ' + label + ' option for ' + time24h + ' or ' + time12h);
+      await control.selectOption(match.value);
       return;
     }
-
-    await control.first().click();
+    await control.click();
     const options = this.page.getByRole('option');
-    const match = options.filter({ hasText: new RegExp(`^${time24h.replace(':', '\\:')}$|^${time12h}import { expect } from '@playwright/test';
-import { DateUtils } from '../utils/dateUtil.js';
-
-export class ScheduleData {
-  constructor(page) {
-    this.page = page;
-    this.pageTitle = page.getByRole('heading', { name: /Class Schedule/i });
-    this.pageSubtitle = page.locator('p').filter({ hasText: 'Manage your daily schedule and events' });
-    this.scheduleTab = page.getByRole('link', { name: /Schedule/i });
-    this.todayButton = page.getByRole('button', { name: /Go to today/i }).first();
-    this.clickTodayButton = page.getByRole('button', { name: 'Today', exact: true });
-    this.scheduleHeader = page.getByRole('heading', { name: /Calendar/i });
-    this.bannerDate = page.locator('header p').nth(1);
-    this.newEvents = scheduleData.newEvents;
-    this.eventUpdates = scheduleData.eventUpdates;
-    this.todaysDateLocator = page.getByText(DateUtils.getFormattedDate(), { exact: true });
-
-    this.addEventButton = page.getByRole('button', { name: /Add Event/i });
-    this.eventTitleInput = page.getByPlaceholder(/Event title/i);
-    this.eventLocationInput = page.getByPlaceholder(/Location/i);
-    this.eventTypeSelect = page.getByRole('combobox').first();
-    // Time controls may be native selects or accessible custom dropdowns.
-    // Resolve them when the Add Event form is open, not before.
-
-    this.descriptionInput = page.getByPlaceholder(/Description/i);
-    this.saveButton = page.getByRole('button', { name: /Save|Submit|Add Event/i });
+    const match24 = options.filter({ hasText: new RegExp('^' + time24h + '$', 'i') });
+    const match12 = options.filter({ hasText: new RegExp('^' + time12h + '$', 'i') });
+    if (await match24.count() > 0) await match24.first().click();
+    else if (await match12.count() > 0) await match12.first().click();
+    else throw new Error('No accessible ' + label + ' option for ' + time24h + ' or ' + time12h);
   }
-
-  async navigate() {
-    await this.scheduleTab.click();
-    await expect(this.pageTitle).toBeVisible();
-  }
-
-  async hoverToday() {
-    await this.todayButton.hover();
-  }
-
-  async clickToday() {
-    await this.clickTodayButton.click();
-  }
-
-  async addEvent(eventData) {
-    await this.addEventButton.click();
-    await expect(this.eventTitleInput).toBeVisible();
-    await this.eventTitleInput.fill(eventData.title);
-
-    if (eventData.location) await this.eventLocationInput.fill(eventData.location);
-    if (eventData.startTime) await this.selectTime('Start Time', eventData.startTime);
-    if (eventData.endTime) await this.selectTime('End Time', eventData.endTime);
-    if (eventData.description) await this.descriptionInput.fill(eventData.description);
-
-    if (eventData.type) {
-      await this.eventTypeSelect.click();
-      await this.page.getByRole('option', { name: eventData.type, exact: true }).click();
-    }
-
-    await this.saveButton.click();
-    await expect(this.eventTitleInput).toBeHidden();
-    await this.verifyEventPresent(eventData.title);
-  }
-
-, 'i') });
-    if (await match.count() === 0) {
-      throw new Error(`No accessible ${label} option matching ${time24h} or ${time12h}. Inspect the opened dropdown options.`);
-    }
-    await match.first().click();
-  }
-
   async verifyEventPresent(title) {
     await expect(this.page.getByText(title, { exact: true }).first()).toBeVisible();
   }
