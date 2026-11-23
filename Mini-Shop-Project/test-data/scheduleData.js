@@ -76,6 +76,14 @@ export class ScheduleData {
     }
     control = control.first();
     const tag = await control.evaluate(el => el.tagName.toLowerCase());
+    // Capture the control before clicking: opening a portal may unmount it.
+    const controlBeforeOpen = await control.evaluate(el => ({
+      tag: el.tagName,
+      role: el.getAttribute('role'),
+      label: el.getAttribute('aria-label'),
+      text: (el.textContent || '').trim().slice(0, 100),
+      html: el.outerHTML.slice(0, 300)
+    }));
     const normalize = value => String(value || '').replace(/\s+/g, ' ').trim().toLowerCase();
     const desired = [normalize(time24h), normalize(time12h)];
     const matchesTime = text => {
@@ -118,18 +126,28 @@ export class ScheduleData {
       }
     }
 
-    const controls = await this.page.getByRole('combobox').evaluateAll(els => els.map(el => ({
-      label: el.getAttribute('aria-label'),
-      role: el.getAttribute('role'),
-      text: (el.textContent || '').trim().slice(0, 90)
-    })));
+    // Never re-query the clicked control here: it may have unmounted.
+    // Use a page snapshot so failed selections produce actionable details.
+    const diagnostic = await this.page.evaluate(() => {
+      const compact = el => ({
+        tag: el.tagName.toLowerCase(),
+        role: el.getAttribute('role'),
+        label: el.getAttribute('aria-label'),
+        text: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 100)
+      });
+      const all = Array.from(document.querySelectorAll('[role="option"], [role="listbox"], [role="combobox"], [role="dialog"], button, select'));
+      const timeLike = all.filter(el => /\b\d{1,2}:\d{2}\b|start time|end time|select time/i.test((el.textContent || '') + ' ' + (el.getAttribute('aria-label') || '')));
+      return {
+        timeRelatedElements: timeLike.slice(0, 30).map(compact),
+        visibleComboboxes: Array.from(document.querySelectorAll('[role="combobox"]')).slice(0, 10).map(compact),
+        roleOptions: Array.from(document.querySelectorAll('[role="option"]')).slice(0, 30).map(compact)
+      };
+    });
     throw new Error(
       'Cannot select ' + label + ' (' + time24h + ' / ' + time12h + '). ' +
-      'Opened control: ' + JSON.stringify(await control.evaluate(el => ({
-        label: el.getAttribute('aria-label'),
-        text: (el.textContent || '').trim().slice(0, 120)
-      }))) + '. Accessible option texts: ' + JSON.stringify(optionTexts.slice(0, 40)) +
-      '. Comboboxes: ' + JSON.stringify(controls) + '. Please share this diagnostic.'
+      'Control before opening: ' + JSON.stringify(controlBeforeOpen) +
+      '. Accessible option texts: ' + JSON.stringify(optionTexts.slice(0, 40)) +
+      '. Dropdown DOM snapshot: ' + JSON.stringify(diagnostic)
     );
   }
   async verifyEventPresent(title) {
