@@ -35,42 +35,37 @@ test.describe('Schedule Management', () => {
   });
 
   test('T-04: Verify new event is visible', async () => {
-    const eventTwoLocal = scheduleDataInfo.newEvents[1];
-    await eventTwoLocal.clickToday();
-    await eventTwoLocal.addEvent(eventTwoLocal);
-    await eventTwoLocal.page.waitForTimeout(1000);
-    await eventTwoLocal.verifyEventPresent(eventTwoLocal.title);
+    const eventData = scheduleDataInfo.newEvents[1];
+    await scheduleDataInfo.clickToday();
+    await scheduleDataInfo.addEvent(eventData);
+    await scheduleDataInfo.verifyEventPresent(eventData.title);
 
-    const eventCard = eventTwoLocal.getEventCardByTitle(eventTwoLocal.title);
-    await expect(eventCard).toContainText(eventTwoLocal.location);
+    const eventCard = scheduleDataInfo.getEventCardByTitle(eventData.title);
+    await expect(eventCard).toContainText(eventData.location);
   });
 
   test('T-05: Edit an existing event', async () => {
     const originalEvent = scheduleDataInfo.newEvents[2];
-    await originalEvent.clickToday();
-    await originalEvent.addEvent(originalEvent);
-    await originalEvent.page.waitForTimeout(1000);
-
     const updateData = scheduleDataInfo.eventUpdates[0];
-    await updateData.editEvent(originalEvent.title, updateData.newData);
-    await updateData.page.waitForTimeout(1000);
-    await updateData.verifyEventPresent(updateData.newData.title);
+
+    await scheduleDataInfo.clickToday();
+    await scheduleDataInfo.addEvent(originalEvent);
+    await scheduleDataInfo.editEvent(originalEvent.title, updateData.newData);
+    await scheduleDataInfo.verifyEventPresent(updateData.newData.title);
+
+    const updatedEventCard = scheduleDataInfo.getEventCardByTitle(updateData.newData.title);
+    await expect(updatedEventCard).toContainText(updateData.newData.location);
   });
 
   test('T-06: Verify edited event shows updated information', async () => {
-    // 1. Get the data objects
-  const originalEventData = scheduleDataInfo.newEvents[3];
-  const updateData = scheduleDataInfo.eventUpdates[1];
+    const originalEvent = scheduleDataInfo.newEvents[3];
+    const updateData = scheduleDataInfo.eventUpdates[1];
 
-  // 2. Use the Page Object Instance (scheduleDataInfo) to perform actions
-  await scheduleDataInfo.clickToday();
-  await scheduleDataInfo.addEvent(originalEventData);
-  
-  // 3. Perform the edit using the instance
-  await scheduleDataInfo.editEvent(originalEventData.title, updateData.newData);
-  
-  // 4. Verify results using the instance locators
-  const eventCard = scheduleDataInfo.getEventCardByTitle(updateData.newData.title);
-  await expect(eventCard).toContainText(updateData.newData.location);
+    await scheduleDataInfo.clickToday();
+    await scheduleDataInfo.addEvent(originalEvent);
+    await scheduleDataInfo.editEvent(originalEvent.title, updateData.newData);
+
+    const updatedEventCard = scheduleDataInfo.getEventCardByTitle(updateData.newData.title);
+    await expect(updatedEventCard).toContainText(updateData.newData.location);
   });
 });
