@@ -15,7 +15,7 @@ class StudentPage {
     this.inputStudentEmail = this.modal.getByPlaceholder('student@email.com');
     this.inputPhone = this.modal.getByPlaceholder('(555) 123-4567');
     this.inputAddress = this.modal.getByPlaceholder('Full address');
-    this.selectGrade = this.modal.getByRole('button', { name: /Select grade/i });
+    this.selectGrade = this.modal.getByRole('combobox');
     this.inputParentName = this.modal.getByPlaceholder('Parent/Guardian name');
     this.inputParentEmail = this.modal.getByPlaceholder('parent@email.com');
     this.submitButton = this.modal.getByRole('button', { name: 'Add Student' });
@@ -50,12 +50,19 @@ class StudentPage {
   }
 
   getStudentCardByName(studentName) {
-    return this.page.locator('div').filter({ hasText: studentName })
-      .filter({ has: this.page.getByText(/Grade \d+/) }).last();
+    return this.page.locator('div.bg-card').filter({
+      has: this.page.getByRole('heading', { name: studentName, exact: true, level: 3 })
+    });
   }
 
   async verifyStudentPresent(studentName) {
     await expect(this.getStudentCardByName(studentName)).toBeVisible();
+  }
+
+  async verifyStudentDetails({ name, email, grade }) {
+    const card = this.getStudentCardByName(name);
+    await expect(card.getByText(email, { exact: true })).toBeVisible();
+    await expect(card.getByText(grade, { exact: true })).toBeVisible();
   }
 
   async getStudentCount() {
@@ -89,6 +96,16 @@ class StudentPage {
 
     await this.submitButton.click();
     await expect(this.modal).toBeHidden();
+  }
+
+  async deleteStudentIfPresent({ name, email }) {
+    const card = this.getStudentCardByName(name).filter({
+      has: this.page.getByText(email, { exact: true })
+    });
+    if (!(await card.isVisible())) return;
+
+    await card.locator('button:has(svg.lucide-trash2)').click();
+    await expect(card).toHaveCount(0);
   }
 
   async searchStudent(searchTerm) {
