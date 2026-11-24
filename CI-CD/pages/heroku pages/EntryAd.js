@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 export class EntryAdPage {
   constructor(page) {
     this.page = page;
-    this.close = page.getByRole('button', { name: 'Close' });
+    this.close = page.locator('#modal .modal-footer').getByText('Close', { exact: true });
     this.header = page.getByRole('heading', { name: 'This is a modal window' });
   }
 
