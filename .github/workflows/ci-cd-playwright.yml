@@ -1,0 +1,57 @@
+name: CI-CD Playwright Tests
+
+on:
+  push:
+    branches: [main, master, "fix/**"]
+    paths:
+      - "CI-CD/**"
+      - ".github/workflows/ci-cd-playwright.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "CI-CD/**"
+      - ".github/workflows/ci-cd-playwright.yml"
+
+concurrency:
+  group: ci-cd-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: CI-CD
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: CI-CD/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run CI-CD Playwright tests
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          BANK_EMAIL: ${{ secrets.BANK_EMAIL }}
+          BANK_PASSWORD: ${{ secrets.BANK_PASSWORD }}
+        run: npx playwright test
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-cd-playwright-report
+          path: CI-CD/playwright-report/
+          retention-days: 14
+      - name: Upload traces and videos
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-cd-test-results
+          path: CI-CD/test-results/
+          if-no-files-found: ignore
+          retention-days: 30
