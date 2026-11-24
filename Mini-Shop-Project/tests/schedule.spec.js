@@ -72,7 +72,14 @@ test.describe('Schedule Management', () => {
     await scheduleDataInfo.verifyPageTitle();
     await scheduleDataInfo.clickToday();
     const reloadedEvent = scheduleDataInfo.getEventCardByTitle(newData.title);
-    test.fail(true, 'The hosted schedule loses newly created events on reload.');
+    const originalCard = scheduleDataInfo.getEventCardByTitle(originalEvent.title);
+    const matchingCards = reloadedEvent.or(originalCard);
+    try {
+      await expect(matchingCards).not.toHaveCount(0);
+    } catch (error) {
+      test.fail(await matchingCards.count() === 0, 'The hosted schedule loses newly created events on reload.');
+      throw error;
+    }
     await expect(reloadedEvent).toContainText(newData.location);
   });
 });

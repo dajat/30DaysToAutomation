@@ -153,23 +153,33 @@ export class ScheduleData {
     );
   }
   async verifyEventPresent(title) {
-    await expect(this.page.getByText(title, { exact: true }).first()).toBeVisible();
+    await expect(this.getEventCardByTitle(title)).toBeVisible();
   }
 
   getEventCardByTitle(title) {
-    return this.page.locator('div').filter({ has: this.page.getByText(title, { exact: true }) }).last();
+    return this.page.locator('[class~="group/event"]').filter({
+      has: this.page.getByText(title, { exact: true })
+    });
+  }
+
+  async openEventDetails(title) {
+    await this.getEventCardByTitle(title).click();
+    const details = this.page.getByRole('dialog', { name: title, exact: true });
+    await expect(details).toBeVisible();
+    return details;
   }
 
   async editEvent(oldTitle, newData) {
-    const eventCard = this.getEventCardByTitle(oldTitle);
-    await eventCard.getByRole('button', { name: /edit/i }).click();
-    await expect(this.eventTitleInput).toBeVisible();
+    const details = await this.openEventDetails(oldTitle);
+    await details.getByRole('button', { name: 'Edit', exact: true }).click();
+    const form = this.page.getByRole('dialog', { name: 'Edit Event', exact: true });
+    await expect(form).toBeVisible();
 
-    if (newData.title) await this.eventTitleInput.fill(newData.title);
-    if (newData.location) await this.eventLocationInput.fill(newData.location);
+    if (newData.title) await form.locator('label:text-is("Title") + input').fill(newData.title);
+    if (newData.location) await form.locator('label:text-is("Location") + input').fill(newData.location);
 
-    await this.saveButton.click();
-    await expect(this.eventTitleInput).toBeHidden();
+    await form.getByRole('button', { name: 'Save Changes', exact: true }).click();
+    await expect(form).toBeHidden();
     await this.verifyEventPresent(newData.title || oldTitle);
   }
 
@@ -199,7 +209,7 @@ export const scheduleData = {
     {
       title: 'event 2',
       location: 'Health Clinic',
-      type: 'Personal',
+      type: 'Event',
       startTime: '14:00',
       endTime: '15:00',
       description: 'Annual check-up with Dr. Smith.'
@@ -207,7 +217,7 @@ export const scheduleData = {
     {
       title: 'event 3',
       location: 'Fitness Center',
-      type: 'Exercise',
+      type: 'Event',
       startTime: '18:00',
       endTime: '19:00',
       description: 'Evening yoga session for relaxation.'
@@ -215,11 +225,11 @@ export const scheduleData = {
     {
       title: 'event 4',
       location: 'Downtown Restaurant',
-      type: 'Social',
-      startTime: '20:00',
-      endTime: '22:00',
+      type: 'Event',
+      startTime: '19:00',
+      endTime: '20:30',
       description: 'Catch up with friends over dinner.'
-    }
+    },
   ],
   eventUpdates: [
     { newData: { title: 'Updated Team Meeting', location: 'Conference Room B' } },
