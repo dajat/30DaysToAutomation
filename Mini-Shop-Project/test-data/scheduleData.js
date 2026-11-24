@@ -213,13 +213,13 @@ export const scheduleData = {
       description: 'Evening yoga session for relaxation.'
     },
     {
-      title: 'event 4',
-      location: 'Downtown Restaurant',
-      type: 'Social',
-      startTime: '20:00',
-      endTime: '22:00',
-      description: 'Catch up with friends over dinner.'
-    }
+  title: 'event 4',
+  location: 'Downtown Restaurant',
+  type: 'Social',
+  startTime: '19:00',
+  endTime: '20:30',
+  description: 'Catch up with friends over dinner.'
+    },
   ],
   eventUpdates: [
     { newData: { title: 'Updated Team Meeting', location: 'Conference Room B' } },
