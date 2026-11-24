@@ -56,7 +56,6 @@ test.describe('Schedule Management', () => {
   });
 
   test('T-06: Verify edited event details survive reload', async ({ page }) => {
-    test.setTimeout(30_000);
     const originalEvent = { ...scheduleDataInfo.newEvents[3], title: uniqueTitle('Event 4') };
     const updateData = scheduleDataInfo.eventUpdates[1];
     const newData = { ...updateData.newData, title: uniqueTitle(updateData.newData.title) };
