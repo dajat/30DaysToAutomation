@@ -55,7 +55,8 @@ test.describe('Schedule Management', () => {
     await expect(scheduleDataInfo.getEventCardByTitle(newData.title)).toContainText(newData.location);
   });
 
-  test('T-06: Verify edited event shows updated information', async () => {
+  test('T-06: Verify edited event details survive reload', async ({ page }) => {
+    test.setTimeout(30_000);
     const originalEvent = { ...scheduleDataInfo.newEvents[3], title: uniqueTitle('Event 4') };
     const updateData = scheduleDataInfo.eventUpdates[1];
     const newData = { ...updateData.newData, title: uniqueTitle(updateData.newData.title) };
@@ -63,6 +64,23 @@ test.describe('Schedule Management', () => {
     await scheduleDataInfo.clickToday();
     await scheduleDataInfo.addEvent(originalEvent);
     await scheduleDataInfo.editEvent(originalEvent.title, newData);
-    await expect(scheduleDataInfo.getEventCardByTitle(newData.title)).toContainText(newData.location);
+    const details = await scheduleDataInfo.openEventDetails(newData.title);
+    await expect(details.getByText(newData.location, { exact: true })).toBeVisible();
+    const timeRange = `${originalEvent.startTime} - ${originalEvent.endTime}`;
+    await expect(details.getByText(timeRange, { exact: true })).toBeVisible();
+
+    await page.reload();
+    await scheduleDataInfo.verifyPageTitle();
+    await scheduleDataInfo.clickToday();
+    const reloadedEvent = scheduleDataInfo.getEventCardByTitle(newData.title);
+    const originalCard = scheduleDataInfo.getEventCardByTitle(originalEvent.title);
+    const matchingCards = reloadedEvent.or(originalCard);
+    try {
+      await expect(matchingCards).not.toHaveCount(0);
+    } catch (error) {
+      test.fail(await matchingCards.count() === 0, 'The hosted schedule loses newly created events on reload.');
+      throw error;
+    }
+    await expect(reloadedEvent).toContainText(newData.location);
   });
 });
