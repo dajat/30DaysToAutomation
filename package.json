@@ -8,6 +8,7 @@
     "test": "npx playwright test",
     "test:debug": "npx playwright test --debug",
     "test:headed": "npx playwright test --headed",
+    "test:learning": "playwright test --config=playwright.learning.config.js",
     "test:student": "npx playwright test tests/student.spec.js",
     "test:schedule": "npx playwright test tests/schedule.spec.js",
     "report": "npx playwright show-report",
