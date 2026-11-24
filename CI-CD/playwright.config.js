@@ -1,6 +1,8 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
+const apiSpecs = '**/api/**/*.spec.js';
+
 export default defineConfig({
   testDir: './tests',
   timeout: 30_000,
@@ -19,8 +21,9 @@ export default defineConfig({
     video: 'retain-on-failure'
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
+    { name: 'api', testMatch: apiSpecs },
+    { name: 'chromium', testIgnore: apiSpecs, use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', testIgnore: apiSpecs, use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', testIgnore: apiSpecs, use: { ...devices['Desktop Safari'] } }
   ]
 });

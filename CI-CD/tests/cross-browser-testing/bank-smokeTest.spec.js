@@ -14,7 +14,7 @@ test.describe('Cross-browser smoke tests', () => {
     await expect(page).toHaveURL(/\/products/);
   });
 
-  test('Bank login + dashboard smoke', async ({ page }, testInfo) => {
+  test('Bank login + dashboard smoke', { tag: '@bank' }, async ({ page }, testInfo) => {
     test.skip(!bankUser.email || !bankUser.password, 'Set BANK_EMAIL and BANK_PASSWORD to run the bank smoke test.');
     console.log(`Running on: ${testInfo.project.name}`);
     const login = new BankLoginPage(page);
