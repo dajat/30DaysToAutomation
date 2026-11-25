@@ -125,6 +125,7 @@ The project includes (or will include):
 
 ---
 
-## 📚 Documentation  
+## 📚 Documentation 
+- See the [Engineering Challenges & Root Cause Analysis]() for the technical challenges encountered throughout the automation experience
 See the [CI/CD setup guide](CI-CD/README.md) for the API and browser test commands, bank smoke credentials, and GitHub Actions reports.
 ---
