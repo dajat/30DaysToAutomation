@@ -12,8 +12,6 @@ A Playwright and JavaScript test automation portfolio built during a 30-day chal
 
 The [student tests](tests/student.spec.js) use unique test data and clean up after each test. The workflows are configured to upload HTML reports, and the CI/CD workflow also collects available failure traces and videos.
 
-**Current CI blockers.** The [root](package.json) and [Mini-Shop](Mini-Shop-Project/package.json) manifests contain invalid JSON. The [CI/CD workflow](.github/workflows/ci-cd-playwright.yml) also needs a `test` script in its [package manifest](CI-CD/package.json) to run `npm test`.
-
 ## Try the API suite
 
 From a checkout, use Node.js 24 to run the standalone API suite against the public JSONPlaceholder service.
@@ -21,7 +19,7 @@ From a checkout, use Node.js 24 to run the standalone API suite against the publ
 ```sh
 cd CI-CD
 npm ci
-npx playwright test --project=api
+npm test -- --project=api
 npx playwright show-report
 ```
 
