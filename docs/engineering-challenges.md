@@ -4,7 +4,7 @@ This portfolio uses Playwright to exercise UI and API workflows. The root suite 
 
 ## Reproducing the test environment in CI
 
-The root project declares Node.js 26.x, and GitHub Actions selects the same release line. The workflow uses `npm ci` with the committed lockfile and installs Playwright browsers and their system dependencies before running tests. This keeps the dependency tree reproducible while allowing Node.js patch releases and runner image updates. The workflow still uses `ubuntu-latest`, so the operating system image can change between runs. [Package manifest](../package.json) · [Playwright workflow](../.github/workflows/playwright.yml)
+GitHub Actions selects the active Node.js LTS line and uses `npm ci` with the committed lockfile. The job runs on Ubuntu 24.04 in a versioned Playwright container that supplies browsers and system dependencies. The Node.js version can change as the LTS alias advances. [Package manifest](../package.json) · [Playwright workflow](../.github/workflows/playwright.yml)
 
 ## Keeping UI tests maintainable
 
@@ -12,7 +12,7 @@ The schedule page object centralizes locators and uses accessible roles for cont
 
 ## Isolating tests that write shared data
 
-The student suite asserts both a change in the total student count and the presence of a specific student. The count can change if another run writes to the same environment. CI uses one worker, which limits concurrency within a job. Independent jobs and local runs can still overlap. Unique records, assertions keyed to those records, and cleanup after each test would make the write tests safer to run in parallel. [Student tests](../tests/student.spec.js) · [Playwright configuration](../playwright.config.js)
+Student tests use unique names, assert against the specific records they create, and clean up those records after each test. CI uses one worker within each job. Independent jobs and local runs can still overlap when they use the same environment. [Student tests](../tests/student.spec.js) · [Playwright configuration](../playwright.config.js)
 
 ## Collecting evidence for cross-browser failures
 
