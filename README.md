@@ -25,6 +25,54 @@ npx playwright test --project=api
 npx playwright show-report
 ```
 
+- **Week 1** opens the local Learning Bank and checks navigation in a [smoke test](Week-One-Learning/tests/smoke.spec.js).
+- **Week 2** practices role, text, test-ID, and CSS locators against the same fixture in the [locators exercise](Week-Two-Learning/PlayWright_Start/tests/locators-selectors.spec.js).
+- **Week 3** captures a screenshot and video in the [Day 18 exercise](Week-Three-Learning/tests/day18-screenshots-videos.spec.js). The [API exercises](CI-CD/tests/api/jsonplaceholder.spec.js) demonstrate independent endpoint checks.
+- **Week 4** sets up local and GitHub Actions runs for the [cross-browser smoke tests](Week-Four-Learning/README.md).
+
+Run a single week with `npm run test:learning -- --project=week-1`, substituting `week-2` or `week-3` as needed. Open the learning report with `npx playwright show-report learning-output/playwright-report`.
+
+---
+
+## 🏦 Banking App – Coverage Goals
+- Login & authentication  
+- Account overview  
+- Fund transfers  
+- Transaction history  
+- Profile updates  
+- Error handling & validation  
+
+---
+
+## 🛒 Mini Shop Project – Coverage Goals
+- Product listing & filtering  
+- Product detail pages  
+- Add to cart  
+- Cart updates  
+- Checkout flow  
+- Order confirmation  
+
+---
+
+## 📈 CI/CD Integration  
+The project includes (or will include):  
+- GitHub Actions workflows  
+- Automated test runs on pull requests  
+- Test reports uploaded as artifacts  
+- Branch protection rules  
+
+---
+
+## 📚 Documentation  
+See the [CI/CD setup guide](CI-CD/README.md) for the API and browser test commands, bank smoke credentials, and GitHub Actions reports.
+Each project folder contains its own README with:  
+- Setup instructions  
+- How to run tests  
+- Framework architecture  
+- Example test cases  
+
+- [Engineering challenges](docs/engineering-challenges.md) covers framework design decisions, trade-offs, and remaining work.
+- [Troubleshooting and root cause analysis](docs/troubleshooting-and-rca.md) records historical CI and test repairs.
 ## 📚 Documentation
 
 - [Engineering challenges](docs/engineering-challenges.md) explains test design, CI reproducibility, and debugging trade-offs.
