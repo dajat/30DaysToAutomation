@@ -30,7 +30,7 @@ Smoke tests are lightweight checks that verify critical functionality and ensure
 
 ## 📌 Usage
 
-From the repository root with Node.js 24, run the default CI suite locally.
+From the repository root with Node.js 26, run the default CI suite locally.
 
 ```sh
 cd CI-CD
