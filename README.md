@@ -124,7 +124,6 @@ The project includes (or will include):
 - Branch protection rules  
 
 ---
-
 ## 📚 Documentation  
 See the [CI/CD setup guide](CI-CD/README.md) for the API and browser test commands, bank smoke credentials, and GitHub Actions reports.
 Each project folder contains its own README with:  
