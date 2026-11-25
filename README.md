@@ -126,5 +126,17 @@ The project includes (or will include):
 ---
 
 ## 📚 Documentation  
+<<<<<<< ours
 See the [CI/CD setup guide](CI-CD/README.md) for the API and browser test commands, bank smoke credentials, and GitHub Actions reports.
+=======
+Each project folder contains its own README with:  
+- Setup instructions  
+- How to run tests  
+- Framework architecture  
+- Example test cases  
+
+- [Engineering challenges](docs/engineering-challenges.md) covers framework design decisions, trade-offs, and remaining work.
+- [Troubleshooting and root cause analysis](docs/troubleshooting-and-rca.md) records historical CI and test repairs.
+
+>>>>>>> theirs
 ---
