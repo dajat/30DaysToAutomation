@@ -1,0 +1,209 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e9]:
+        - generic [ref=e11]:
+          - img "ClassPilot Logo" [ref=e14]
+          - generic [ref=e15]:
+            - heading "ClassPilot" [level=2] [ref=e16]
+            - paragraph [ref=e17]: Education Management
+        - generic [ref=e18]:
+          - generic [ref=e19]: Teaching Tools
+          - list [ref=e21]:
+            - listitem [ref=e22]:
+              - link "Dashboard" [ref=e23] [cursor=pointer]:
+                - /url: /
+                - img [ref=e24]
+                - generic [ref=e27]: Dashboard
+            - listitem [ref=e28]:
+              - link "Students" [active] [ref=e29] [cursor=pointer]:
+                - /url: /students
+                - img [ref=e30]
+                - generic [ref=e35]: Students
+            - listitem [ref=e36]:
+              - link "Attendance" [ref=e37] [cursor=pointer]:
+                - /url: /attendance
+                - img [ref=e38]
+                - generic [ref=e41]: Attendance
+            - listitem [ref=e42]:
+              - link "Schedule" [ref=e43] [cursor=pointer]:
+                - /url: /schedule
+                - img [ref=e44]
+                - generic [ref=e46]: Schedule
+            - listitem [ref=e47]:
+              - link "Grades" [ref=e48] [cursor=pointer]:
+                - /url: /grades
+                - img [ref=e49]
+                - generic [ref=e52]: Grades
+            - listitem [ref=e53]:
+              - link "Assignments" [ref=e54] [cursor=pointer]:
+                - /url: /assignments
+                - img [ref=e55]
+                - generic [ref=e58]: Assignments
+            - listitem [ref=e59]:
+              - link "Lesson Plans" [ref=e60] [cursor=pointer]:
+                - /url: /lesson-plans
+                - img [ref=e61]
+                - generic [ref=e64]: Lesson Plans
+            - listitem [ref=e65]:
+              - link "Communications" [ref=e66] [cursor=pointer]:
+                - /url: /communications
+                - img [ref=e67]
+                - generic [ref=e70]: Communications
+            - listitem [ref=e71]:
+              - link "Reports" [ref=e72] [cursor=pointer]:
+                - /url: /reports
+                - img [ref=e73]
+                - generic [ref=e75]: Reports
+            - listitem [ref=e76]:
+              - link "Notes & Feedback" [ref=e77] [cursor=pointer]:
+                - /url: /notes
+                - img [ref=e78]
+                - generic [ref=e80]: Notes & Feedback
+        - generic [ref=e81]:
+          - generic [ref=e82]: User Views
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - link "Parent View" [ref=e86] [cursor=pointer]:
+                - /url: /parent-view
+                - img [ref=e87]
+                - generic [ref=e90]: Parent View
+            - listitem [ref=e91]:
+              - link "Student View" [ref=e92] [cursor=pointer]:
+                - /url: /student-view
+                - img [ref=e93]
+                - generic [ref=e95]: Student View
+      - generic [ref=e96]:
+        - banner [ref=e97]:
+          - generic [ref=e99]:
+            - button "Toggle Sidebar" [ref=e101] [cursor=pointer]:
+              - img
+              - generic [ref=e102]: Toggle Sidebar
+            - generic [ref=e103]:
+              - heading "Welcome back, hello" [level=2] [ref=e104]
+              - paragraph [ref=e105]: Saturday, March 28, 2026
+            - generic [ref=e106]:
+              - button "7" [ref=e107] [cursor=pointer]:
+                - img
+                - generic [ref=e108]: "7"
+              - button "H" [ref=e109] [cursor=pointer]:
+                - generic [ref=e111]: H
+        - main [ref=e112]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - heading "Student Management" [level=1] [ref=e117]
+                - paragraph [ref=e118]: Manage your students and their information
+              - button "Add Student" [ref=e119] [cursor=pointer]:
+                - img
+                - text: Add Student
+            - generic [ref=e120]:
+              - generic [ref=e121]:
+                - img [ref=e122]
+                - textbox "Search students..." [ref=e125]
+              - generic [ref=e127]:
+                - img [ref=e128]
+                - text: 3 Students
+            - generic [ref=e133]:
+              - generic [ref=e134]:
+                - generic [ref=e136]:
+                  - generic [ref=e137]:
+                    - generic [ref=e139]: EJ
+                    - generic [ref=e140]:
+                      - heading "Emma Johnson" [level=3] [ref=e141]
+                      - paragraph [ref=e142]: Grade 10
+                  - generic [ref=e143]: active
+                - generic [ref=e144]:
+                  - generic [ref=e145]:
+                    - img [ref=e146]
+                    - generic [ref=e149]: emma.j@email.com
+                  - generic [ref=e150]:
+                    - img [ref=e151]
+                    - generic [ref=e153]: (555) 123-4567
+                  - generic [ref=e154]:
+                    - img [ref=e155]
+                    - generic [ref=e158]: 123 Oak Street, Springfield
+                  - generic [ref=e159]:
+                    - paragraph [ref=e160]: "Parent: Sarah Johnson"
+                    - paragraph [ref=e161]: "Enrolled: 8/14/2024"
+                  - generic [ref=e162]:
+                    - button "Edit" [ref=e163] [cursor=pointer]:
+                      - img
+                      - text: Edit
+                    - button [ref=e164] [cursor=pointer]:
+                      - img
+              - generic [ref=e165]:
+                - generic [ref=e167]:
+                  - generic [ref=e168]:
+                    - generic [ref=e170]: MC
+                    - generic [ref=e171]:
+                      - heading "Michael Chen" [level=3] [ref=e172]
+                      - paragraph [ref=e173]: Grade 11
+                  - generic [ref=e174]: active
+                - generic [ref=e175]:
+                  - generic [ref=e176]:
+                    - img [ref=e177]
+                    - generic [ref=e180]: michael.c@email.com
+                  - generic [ref=e181]:
+                    - img [ref=e182]
+                    - generic [ref=e184]: (555) 234-5678
+                  - generic [ref=e185]:
+                    - img [ref=e186]
+                    - generic [ref=e189]: 456 Maple Ave, Springfield
+                  - generic [ref=e190]:
+                    - paragraph [ref=e191]: "Parent: Lisa Chen"
+                    - paragraph [ref=e192]: "Enrolled: 8/14/2024"
+                  - generic [ref=e193]:
+                    - button "Edit" [ref=e194] [cursor=pointer]:
+                      - img
+                      - text: Edit
+                    - button [ref=e195] [cursor=pointer]:
+                      - img
+              - generic [ref=e196]:
+                - generic [ref=e198]:
+                  - generic [ref=e199]:
+                    - generic [ref=e201]: SR
+                    - generic [ref=e202]:
+                      - heading "Sofia Rodriguez" [level=3] [ref=e203]
+                      - paragraph [ref=e204]: Grade 12
+                  - generic [ref=e205]: active
+                - generic [ref=e206]:
+                  - generic [ref=e207]:
+                    - img [ref=e208]
+                    - generic [ref=e211]: sofia.r@email.com
+                  - generic [ref=e212]:
+                    - img [ref=e213]
+                    - generic [ref=e215]: (555) 345-6789
+                  - generic [ref=e216]:
+                    - img [ref=e217]
+                    - generic [ref=e220]: 789 Pine Road, Springfield
+                  - generic [ref=e221]:
+                    - paragraph [ref=e222]: "Parent: Carlos Rodriguez"
+                    - paragraph [ref=e223]: "Enrolled: 8/14/2024"
+                  - generic [ref=e224]:
+                    - button "Edit" [ref=e225] [cursor=pointer]:
+                      - img
+                      - text: Edit
+                    - button [ref=e226] [cursor=pointer]:
+                      - img
+    - region "Notifications (F8)":
+      - list [ref=e228]:
+        - status [ref=e229]:
+          - generic [ref=e230]:
+            - generic [ref=e231]: Welcome back!
+            - generic [ref=e232]: You have been signed in successfully.
+          - button [ref=e233] [cursor=pointer]:
+            - img [ref=e234]
+    - region "Notifications alt+T"
+  - complementary "Edit with Lovable" [ref=e238]:
+    - link "Edit with Lovable" [ref=e239] [cursor=pointer]:
+      - /url: https://lovable.dev/projects/e72892f5-1e19-494d-a0dd-fac4aaf73da4?utm_source=lovable-badge
+      - generic [ref=e240]: Edit with
+      - img [ref=e241]
+    - button "Dismiss" [ref=e246] [cursor=pointer]:
+      - img [ref=e247]
+  - status [ref=e249]: Notification Welcome back!You have been signed in successfully.
+```

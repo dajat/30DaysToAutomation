@@ -1,0 +1,174 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "logo" [ref=e5] [cursor=pointer]:
+        - /url: /dashboard
+        - img "logo" [ref=e6]
+      - navigation [ref=e7]:
+        - listitem [ref=e8]:
+          - link "Dashboard" [ref=e9] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e10]:
+              - img [ref=e11]
+              - generic [ref=e13]: Dashboard
+        - listitem [ref=e14]:
+          - link "Accounts" [ref=e15] [cursor=pointer]:
+            - /url: /dashboard/accounts
+            - generic [ref=e16]:
+              - img [ref=e17]
+              - generic [ref=e19]: Accounts
+        - listitem [ref=e20]:
+          - link "Transactions" [ref=e21] [cursor=pointer]:
+            - /url: /dashboard/transactions
+            - generic [ref=e22]:
+              - img [ref=e23]
+              - generic [ref=e27]: Transactions
+        - listitem [ref=e28]:
+          - link "Payments" [ref=e29] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e30]:
+              - img [ref=e31]
+              - generic [ref=e35]: Payments
+        - listitem [ref=e36]:
+          - link "Cards" [ref=e37] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e38]:
+              - img [ref=e39]
+              - generic [ref=e41]: Cards
+        - listitem [ref=e42]:
+          - link "Savings" [ref=e43] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e44]:
+              - img [ref=e45]
+              - generic [ref=e48]: Savings
+        - listitem [ref=e49]:
+          - link "Investments" [ref=e50] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e51]:
+              - img [ref=e52]
+              - generic [ref=e54]: Investments
+        - listitem [ref=e55]:
+          - link "Loans" [ref=e56] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e57]:
+              - img [ref=e58]
+              - generic [ref=e60]: Loans
+      - generic [ref=e61]:
+        - generic [ref=e63]: TU
+        - generic [ref=e65]:
+          - heading "Test U." [level=1] [ref=e66]
+          - paragraph [ref=e67]: tes...@yopmail.com
+        - button [ref=e68] [cursor=pointer]:
+          - img [ref=e69]
+    - generic [ref=e71]:
+      - banner [ref=e72]:
+        - generic [ref=e74]:
+          - textbox "Search..." [ref=e75]
+          - img [ref=e77]
+        - generic [ref=e79]:
+          - button [ref=e81] [cursor=pointer]:
+            - img [ref=e82]
+          - generic [ref=e86] [cursor=pointer]: TU
+      - main [ref=e88]:
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - generic [ref=e91]:
+              - heading "Overview" [level=2] [ref=e92]
+              - generic [ref=e93]: / Welcome back, Test ✋🏼
+            - button "Start a transaction" [ref=e95] [cursor=pointer]:
+              - text: Start a transaction
+              - img [ref=e96]
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - img "rocket" [ref=e100]
+              - heading "Get more features on your account" [level=1] [ref=e101]
+            - generic:
+              - img "rocket" [ref=e102]
+              - button "Begin Now" [ref=e103] [cursor=pointer]:
+                - text: Begin Now
+                - img [ref=e104]
+              - img [ref=e107]
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - generic [ref=e111]:
+                - img [ref=e113]
+                - combobox [ref=e116]:
+                  - option "USD" [selected]
+              - generic [ref=e117]:
+                - generic [ref=e118]:
+                  - text: Account balance
+                  - paragraph [ref=e119]: $22,010.00
+                - generic [ref=e120] [cursor=pointer]:
+                  - img [ref=e121]
+                  - generic [ref=e123]: Hide balance
+            - generic [ref=e124]:
+              - generic [ref=e126]:
+                - textbox [ref=e129]: 11/2025
+                - img [ref=e130]
+              - generic [ref=e132]:
+                - text: Total amount received
+                - paragraph [ref=e133]: $0.00
+            - generic [ref=e134]:
+              - generic [ref=e136]:
+                - textbox [ref=e139]: 11/2025
+                - img [ref=e140]
+              - generic [ref=e142]:
+                - text: Total amount spent
+                - paragraph [ref=e143]: $0.00
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - generic [ref=e146]:
+                - generic [ref=e147]:
+                  - heading "Activity on your account" [level=2] [ref=e148]
+                  - combobox [ref=e149]:
+                    - option "Last 7 days" [selected]
+                    - option "This week"
+                    - option "This Month"
+                - generic [ref=e150]:
+                  - generic [ref=e151]: Deposit
+                  - generic [ref=e153]: Withdraw
+              - img [ref=e159]:
+                - generic [ref=e164]:
+                  - generic [ref=e166]: Sunday
+                  - generic [ref=e168]: Monday
+                  - generic [ref=e170]: Tuesday
+                  - generic [ref=e172]: Wednesday
+                  - generic [ref=e174]: Thursday
+                  - generic [ref=e176]: Friday
+                  - generic [ref=e178]: Saturday
+                - generic [ref=e180]:
+                  - generic [ref=e182]: "0"
+                  - generic [ref=e184]: "1"
+                  - generic [ref=e186]: "2"
+                  - generic [ref=e188]: "3"
+                  - generic [ref=e190]: "4"
+            - generic [ref=e191]:
+              - generic [ref=e192]:
+                - heading "Recent Transactions" [level=2] [ref=e193]
+                - link "See All" [ref=e194] [cursor=pointer]:
+                  - /url: /dashboard/transactions
+                  - text: See All
+                  - img [ref=e195]
+              - generic [ref=e197]:
+                - generic [ref=e198]:
+                  - generic [ref=e200]: Withdrawal
+                  - generic [ref=e201]: "-$20000"
+                - generic [ref=e202]:
+                  - generic [ref=e204]: Deposit
+                  - generic [ref=e205]: "-$20000"
+                - generic [ref=e206]:
+                  - generic [ref=e208]: Withdrawal
+                  - generic [ref=e209]: "-$10000"
+  - generic [ref=e211]:
+    - alert [ref=e212]:
+      - img [ref=e214]
+      - generic [ref=e216]: Login successful
+    - button "close" [ref=e217] [cursor=pointer]:
+      - img [ref=e218]
+    - progressbar "notification timer" [ref=e222]
+  - alert [ref=e223]
+  - generic [ref=e224]: "0"
+```

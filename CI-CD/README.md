@@ -9,18 +9,19 @@ Smoke tests are lightweight checks that verify critical functionality and ensure
 ## ⚙️ How It Works
 
 1. **Pipeline Trigger**
-   - The [CI-CD Playwright Tests workflow](../.github/workflows/ci-cd-playwright.yml) runs on matching pushes and pull requests when this project or its workflow changes.
-   - A manual run can select the dedicated bank login smoke job.
+   - Runs on `push` or `pull_request` events.
 
 2. **Build & Setup**
-   - Set up Node.js 24, install locked dependencies, and install Playwright browsers.
+   - Install dependencies
+   - Build the application (if required)
 
 3. **Smoke Test Execution**
-   - The default job runs the API and browser exercises, including the shop smoke test, and uploads the HTML report and available failure artifacts.
-   - The manual bank job checks login and dashboard loading in Chromium, Firefox, and WebKit.
+   - Run a small, fast test suite
+   - Validate core endpoints, services, or startup behavior
 
 4. **Fail Fast**
-   - Failed tests fail their job. The bank job checks for its required credentials before installing dependencies.
+   - Pipeline fails immediately if smoke tests fail
+   - Prevents broken builds from progressing
 
 ## ✅ Smoke Test Guidelines
 
@@ -30,24 +31,14 @@ Smoke tests are lightweight checks that verify critical functionality and ensure
 
 ## 📌 Usage
 
-From the repository root with Node.js 24, run the default CI suite locally.
-
-```sh
-cd CI-CD
-npm ci
-npx playwright install chromium firefox webkit
-npm test -- --grep-invert @bank
-```
-
-Use `npm test -- --project=api` to run only the JSONPlaceholder checks, or `npm run report` to open the HTML report.
-
-For a local bank smoke run, set `BANK_EMAIL` and `BANK_PASSWORD` for your test account, then run `npm test -- --grep @bank`. For GitHub Actions setup, see the [Week 4 walkthrough](../Week-Four-Learning/README.md).
+1. Add your smoke tests to the `/smoke-tests` directory (or equivalent).  
+2. Update your GitHub Actions workflow to run the tests.  
+3. Commit and push — the pipeline will run automatically.
 
 ## 🎯 Expected Outcome
 
-- The default job passes when the API and browser exercises pass.
-- The bank smoke job passes when login and dashboard loading pass in all three browsers.
-- For a failure, open the job log and any available Playwright report.
+- ✅ Pipeline passes → application is healthy  
+- ❌ Pipeline fails → investigate before proceeding
 
 ---
 
