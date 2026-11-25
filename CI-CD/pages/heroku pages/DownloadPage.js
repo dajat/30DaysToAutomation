@@ -3,10 +3,6 @@ import { expect } from '@playwright/test';
 export class DownloadPage {
   constructor(page) {
     this.page = page;
-    this.downloadLink = page.locator("//a[@href='download/some-file.txt']");
-  }
-
-  async goto(){
     this.downloadLink = page.locator("a[href='download/some-file.txt']");
   }
 
@@ -20,14 +16,11 @@ export class DownloadPage {
       this.page.waitForEvent('download'),
       this.downloadLink.click()
     ]);
-    
-    const suggested = download.suggestedFilename();
-    const path = await download.path(); // may be null on CI, but ok locally
-    return { suggested, path };
-  }
+    const stream = await download.createReadStream();
+    if (!stream) throw new Error('The browser did not provide a readable download stream.');
 
-  async expectDownloadedFilename(suggested) {
-    // We just assert a filename exists (site serves random files)
-    await expect.soft(suggested).toBeTruthy();
+    let content = '';
+    for await (const chunk of stream) content += chunk.toString('utf8');
+    return { suggested: download.suggestedFilename(), content };
   }
 }
