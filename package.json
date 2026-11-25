@@ -1,31 +1,57 @@
 {
-  "name": "day-28-k12-harmony-hub-automation",
+  "name": "30-days-to-automation",
   "version": "1.0.0",
-  "description": "K12 Harmony Hub automation framework with Playwright and Allure",
-  "main": "index.js",
+  "description": "A QA automation and CI portfolio demonstrating Playwright, JavaScript, API testing, cross-browser validation, and GitHub Actions.",
+  "private": true,
   "type": "module",
+  "author": "Testamplify Instructor",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dajat/30DaysToAutomation.git"
+  },
+  "homepage": "https://github.com/dajat/30DaysToAutomation#readme",
+  "bugs": {
+    "url": "https://github.com/dajat/30DaysToAutomation/issues"
+  },
+  "engines": {
+    "node": "26.x"
+  },
   "scripts": {
+<<<<<<< ours
     "test": "npx playwright test",
     "test:debug": "npx playwright test --debug",
     "test:headed": "npx playwright test --headed",
+    "test:learning": "playwright test --config=playwright.learning.config.js",
     "test:student": "npx playwright test tests/student.spec.js",
     "test:schedule": "npx playwright test tests/schedule.spec.js",
     "report": "npx playwright show-report",
+=======
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:learning": "playwright test --config=playwright.learning.config.js",
+    "test:student": "playwright test tests/student.spec.js",
+    "test:schedule": "playwright test tests/schedule.spec.js",
+    "report": "playwright show-report",
+>>>>>>> theirs
     "allure:generate": "allure generate ./allure-results --clean -o ./allure-report",
     "allure:open": "allure open ./allure-report",
     "allure:serve": "allure serve ./allure-results"
   },
   "keywords": [
     "playwright",
-    "automation",
-    "testing",
     "javascript",
-    "allure",
-    "k12",
-    "education"
+    "qa-automation",
+    "software-testing",
+    "end-to-end-testing",
+    "api-testing",
+    "cross-browser-testing",
+    "page-object-model",
+    "ci-cd",
+    "github-actions",
+    "allure"
   ],
-  "author": "Testamplify Instructor",
-  "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "@types/node": "^20.19.35",

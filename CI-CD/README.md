@@ -1,6 +1,6 @@
 # 🚀 CI/CD Smoke Test with GitHub Actions
 
-This repository demonstrates how to configure a **GitHub Actions** pipeline to run automated smoke tests after each build or deployment.
+This project uses **GitHub Actions** to run Playwright API, browser, and smoke tests.
 
 ## 🎯 Purpose
 

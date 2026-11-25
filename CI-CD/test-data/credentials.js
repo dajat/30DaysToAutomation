@@ -1,9 +1,14 @@
-export const bankUser = { email: 'testuser2@yopmail.com', password: 'Pass2005#' };
-export const shopUser = { email: 'testuser2@yopmail.com', password: 'Pass2005#' };
+export const bankUser = {
+  email: process.env.BANK_EMAIL || '',
+  password: process.env.BANK_PASSWORD || ''
+};
+
+export const shopUser = {
+  email: process.env.SHOP_EMAIL || bankUser.email,
+  password: process.env.SHOP_PASSWORD || bankUser.password
+};
 
 export const bankUsers = [
-    { email: 'testuser@yopmail.com', password: 'Pass2005#', expectSuccess: true },
-    { email: 'testuser2@yopmail.com', password: 'Pass2005#', expectSuccess: true },
-    { email: 'user4@yopmail.com', password: 'Wrong123#', expectSuccess: false },
-    { email: 'user5@yopmail.com', password: 'Wrong123#', expectSuccess: false },
-    ];
+  { ...bankUser, expectSuccess: true },
+  { email: 'invalid-user@example.com', password: 'Invalid-Password-123!', expectSuccess: false }
+];

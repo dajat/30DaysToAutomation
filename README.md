@@ -17,22 +17,14 @@ Each day introduces new tasks, enhancements, or refactoring steps to evolve the 
 
 ```
 30DaysToAutomation/
-│
-├── Bank-Project/
-│   ├── tests/
-│   ├── pages/
-│   ├── utils/
-│   ├── config/
-│   └── README.md
-│
-├── Mini-Shop-Project/
-│   ├── tests/
-│   ├── pages/
-│   ├── utils/
-│   ├── config/
-│   └── README.md
-│
-└── README.md  (this file)
+├── .github/workflows/     Active GitHub Actions workflows
+├── Week-One-Learning/     Local bank fixture and first smoke test
+├── Week-Two-Learning/     Locator practice
+├── Week-Three-Learning/   Screenshot and video practice
+├── Week-Four-Learning/    CI/CD smoke test walkthrough
+├── CI-CD/                 API and cross-browser tests
+├── Mini-Shop-Project/     Mini-Shop test project
+└── tests/                Root Playwright tests
 ```
 
 ---
@@ -49,8 +41,8 @@ Each day introduces new tasks, enhancements, or refactoring steps to evolve the 
 
 ## 🛠️ Tech Stack  
 ### **Core Tools**
-- **Playwright** or **Selenium** (depending on project)
-- **Node.js / JavaScript** or **Python** (your chosen language)
+- **Playwright**
+- **Node.js / JavaScript**
 - **Git & GitHub** for version control
 - **Allure** or **HTML Reports** for test reporting
 
@@ -85,9 +77,26 @@ Each day introduces new tasks, enhancements, or refactoring steps to evolve the 
 - Finalize documentation  
 - Prepare demo videos or screenshots  
 
+### Run the learning exercises
+
+From the repository root with Node.js 24, install the locked dependencies and Chromium.
+
+```sh
+npm ci
+npx playwright install chromium
+npm run test:learning
+```
+
+- **Week 1** opens the local Learning Bank and checks navigation in a [smoke test](Week-One-Learning/tests/smoke.spec.js).
+- **Week 2** practices role, text, test-ID, and CSS locators against the same fixture in the [locators exercise](Week-Two-Learning/PlayWright_Start/tests/locators-selectors.spec.js).
+- **Week 3** captures a screenshot and video in the [Day 18 exercise](Week-Three-Learning/tests/day18-screenshots-videos.spec.js). The [API exercises](CI-CD/tests/api/jsonplaceholder.spec.js) demonstrate independent endpoint checks.
+- **Week 4** sets up local and GitHub Actions runs for the [cross-browser smoke tests](Week-Four-Learning/README.md).
+
+Run a single week with `npm run test:learning -- --project=week-1`, substituting `week-2` or `week-3` as needed. Open the learning report with `npx playwright show-report learning-output/playwright-report`.
+
 ---
 
-## 🏦 Banking App – Test Coverage  
+## 🏦 Banking App – Coverage Goals
 - Login & authentication  
 - Account overview  
 - Fund transfers  
@@ -97,7 +106,7 @@ Each day introduces new tasks, enhancements, or refactoring steps to evolve the 
 
 ---
 
-## 🛒 Mini Shop Project – Test Coverage  
+## 🛒 Mini Shop Project – Coverage Goals
 - Product listing & filtering  
 - Product detail pages  
 - Add to cart  
@@ -117,12 +126,17 @@ The project includes (or will include):
 ---
 
 ## 📚 Documentation  
+<<<<<<< ours
+See the [CI/CD setup guide](CI-CD/README.md) for the API and browser test commands, bank smoke credentials, and GitHub Actions reports.
+=======
 Each project folder contains its own README with:  
 - Setup instructions  
 - How to run tests  
 - Framework architecture  
 - Example test cases  
 
-Daily logs or notes may be included under a `/docs` folder.
+- [Engineering challenges](docs/engineering-challenges.md) covers framework design decisions, trade-offs, and remaining work.
+- [Troubleshooting and root cause analysis](docs/troubleshooting-and-rca.md) records historical CI and test repairs.
 
+>>>>>>> theirs
 ---

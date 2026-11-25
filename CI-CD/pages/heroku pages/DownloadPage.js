@@ -7,11 +7,15 @@ export class DownloadPage {
   }
 
   async goto(){
+    this.downloadLink = page.locator("a[href='download/some-file.txt']");
+  }
+
+  async goto() {
     await this.page.goto('https://the-internet.herokuapp.com/download');
   }
 
   async downloadFirstFile() {
-    await this.downloadLink.waitFor({ state: 'visible'});
+    await expect(this.downloadLink).toBeVisible();
     const [download] = await Promise.all([
       this.page.waitForEvent('download'),
       this.downloadLink.click()

@@ -1,0 +1,95 @@
+name: CI-CD Playwright Tests
+
+on:
+  push:
+    branches: [main, master, "fix/**"]
+    paths:
+      - "CI-CD/**"
+      - ".github/workflows/ci-cd-playwright.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "CI-CD/**"
+      - ".github/workflows/ci-cd-playwright.yml"
+  workflow_dispatch:
+    inputs:
+      bank_smoke:
+        description: Run bank login smoke tests
+        type: boolean
+        default: false
+
+concurrency:
+  group: ci-cd-tests-${{ github.ref }}-${{ github.event_name }}-${{ inputs.bank_smoke || false }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    if: ${{ github.event_name != 'workflow_dispatch' || !inputs.bank_smoke }}
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: CI-CD
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: CI-CD/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run CI-CD Playwright tests
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+        run: npm test -- --grep-invert @bank
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ci-cd-playwright-report
+          path: CI-CD/playwright-report/
+          retention-days: 14
+      - name: Upload traces and videos
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ci-cd-test-results
+          path: CI-CD/test-results/
+          if-no-files-found: ignore
+          retention-days: 30
+
+  bank-smoke:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.bank_smoke }}
+    timeout-minutes: 15
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: CI-CD
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check bank smoke credentials
+        env:
+          BANK_EMAIL: ${{ secrets.BANK_EMAIL }}
+          BANK_PASSWORD: ${{ secrets.BANK_PASSWORD }}
+        run: |
+          if [ -z "$BANK_EMAIL" ] || [ -z "$BANK_PASSWORD" ]; then
+            echo "::error::Set the BANK_EMAIL and BANK_PASSWORD repository secrets to run bank smoke tests."
+            exit 1
+          fi
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: CI-CD/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run bank login smoke tests
+        env:
+          BANK_EMAIL: ${{ secrets.BANK_EMAIL }}
+          BANK_PASSWORD: ${{ secrets.BANK_PASSWORD }}
+        run: npm test -- --grep @bank --reporter=list
